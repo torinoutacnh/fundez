@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!-- Information -->
+	<PropertyGroup>
+		<Authors>Linh Nguyen</Authors>
+		<Copyright>http://topnguyen.net</Copyright>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<LangVersion>7.2</LangVersion>
+		<!-- Output -->
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>.\bin\</OutputPath>
+	</PropertyGroup>
+	<!-- Copy to Ouput -->
+	<ItemGroup>
+		<Content Include="connectionconfig.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Cross\TIGE.Core\TIGE.Core.csproj" />
+		<ProjectReference Include="..\TIGE.Contract.Repository\TIGE.Contract.Repository.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.7" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.7" />
+	
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Migrations\" />
+	</ItemGroup>
+</Project>

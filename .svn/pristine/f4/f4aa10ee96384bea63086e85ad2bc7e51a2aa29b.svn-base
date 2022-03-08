@@ -1,0 +1,150 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using Enums = TIGE.Core.Share.Constants.Enums
+@inject IConfigurationService ConfigurationService
+@{
+
+    var wallet = (WalletModel)ViewBag.wallet;
+    var config = ConfigurationService.GetConfig();
+}
+
+@model TIGE.Core.Share.Models.CreateWithdrawRequestModel
+<style>
+
+    @@media only screen and (max-width: 450px) {
+        .table-responsive--md tr th, .table-responsive--md tr td {
+            padding-left: 80px !important;
+            white-space: initial;
+            word-break: break-all
+        }
+    }
+
+
+</style>
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Withdraw </span> <b class="base--color">Request</b></h2>
+                </div>
+                <div class="section-header">
+                    <ol>
+                        <li>
+                            1. Only withdrawal when you have updated your profile with the ETH wallet address and confirmed update by your mail.
+                        </li>
+                        <li>2. Recheck your profile if your address has updated successfully before withdrawal.</li>
+                        <li>3. Minimum withdrawal transaction is @config.MinWithdraw USD.</li>
+                        <li>4. Network withdrawal fee and time proceed will depend on ETH gas when the transactions confirm.</li>
+                        <li>5. Until the approval from the system is made, an equivalent amount of your assets will be temporarily unavailable for other transactions.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="SubmitWithdraw" method="post">
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label>Your Wallet Address ETH</label>
+                                <div>
+                                    <h2 style="word-break: break-all">@wallet.Address</h2>
+                                </div>
+                                @*<input type="text" id="" value="" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Balance (USD)</label>
+                                <div>
+                                    <h2>@wallet.Balance.ToString("###,###,###,###0.##")</h2>
+                                </div>
+                                @*<input type="text" value="@wallet.Balance.ToString("###,###,###,###.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Amount (USD)</label>
+                                <input type="text" asp-for="Amount" placeholder="0.00" value="@config.MinWithdraw" class="form-control">
+                                <span asp-validation-for="Amount"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Send Request</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive--md p-0">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Amount (USD)</th>
+                                <th>Fee (USD)</th>
+                                <th>Amount (ETH)</th>
+                                <th>Time</th>
+                                <th>Tx hash</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                var withdraws = (List<WithdrawRequestModel>)ViewBag.WithDraw;
+
+                                foreach (var withdraw in withdraws.OrderByDescending(x=>x.CreatedTime))
+                                {
+                                    <tr>
+                                        <td data-label="ID">@withdraw.Id</td>
+                                        <td data-label="Amount (USD)">
+                                            <span class="text-success">@withdraw.AmountUSD.ToString("###,###,###,###0.##")</span>
+                                        </td>
+                                        <td data-label="Fee (USD)">
+                                            <span class="text-success">@withdraw.FeeUSD.ToString("###,###,###,###0.##")</span>
+                                        </td>
+                                        <td data-label="Amount (ETH)">
+                                            <span class="text-success">@withdraw.AmountETH.ToString("###,###,###,###0.######")</span>
+                                        </td>
+                                        <td data-label="Time">@withdraw.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        <td data-label="Tx hash" class="tx-hash">@withdraw.TxHash</td>
+                                        <td data-label="Status">@withdraw.Status.AsString(EnumFormat.DisplayName)</td>
+                                        @if (withdraw.Status != Enums.WithdrawStatus.Approved && withdraw.Status != Enums.WithdrawStatus.Confirming)
+                                        {
+                                            <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="deleteWithdraw('@withdraw.Id')" ><i class="fa fa-trash"></i></span></td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function deleteWithdraw(id) {
+            
+        var url = '@Url.Action("DeleteWithdraw","Wallet", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+            
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+</script>

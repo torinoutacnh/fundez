@@ -1,0 +1,154 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Repository.Models.Stacking
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using Enums = TIGE.Core.Share.Constants.Enums
+@inject IStackConfigService ConfigurationService
+@{
+
+    var CurrentToken = ViewBag.CurrentToken;
+    var config = ConfigurationService.GetConfig();
+    var wallet = ViewBag.Wallet as StackingWalletEntity;
+}
+
+@model TIGE.Core.Share.Models.CreateWithdrawRequestModel
+<style>
+
+    @@media only screen and (max-width: 450px) {
+        .table-responsive--md tr th, .table-responsive--md tr td {
+            padding-left: 80px !important;
+            white-space: initial;
+            word-break: break-all
+        }
+    }
+</style>
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Transfer </span> <b class="base--color">Request</b></h2>
+                </div>
+                @*<div class="text-center">
+                    <span class="col-sm-5" onclick="">
+                        <a href="/wallets/withdraw"><label class="text-warning">Transfer USD</label></a>
+                    </span>
+                    <span class="col-sm-5">
+                        <a href="/wallets/withdrawtige"><label class="text-warning">Transfer TIGE</label></a>
+                    </span>
+                </div>*@
+                <div class="section-header">
+                    <ol>
+                        @*<li><b class="base--color">Please double check the wallet address network and read the terms carefully before creating and confirming the request. To support deposits we use only the following 1 Deposit Cryptos:</b></li>
+                        <li>  • TIGE on BEP20 (BSC) Network      </li>*@
+                        <li>  1. Please double check Amount Tige Transfer carefully before creating and confirming the request.      </li>
+                        <li>  2. Balance will be transfered after confirmations and system approval.     </li>
+                        <li>  3. Until the approval from the system is made, an equivalent amount of your assets will be temporarily unavailable for withdrawals.     </li>
+                    </ol> 
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="CommitTransfer" method="post">
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label class="d-block">Staking Wallet (TIGE)</label>
+                                <h2 class="base--color">@wallet.Balance.ToString("###,###,###,###0.####")</h2>
+                                <label class="d-block">Total Tokens</label>
+                                <h2 class="base--color">@CurrentToken.ToString("###,###,###,###0.####")</h2>
+                                <label>Amount (TIGE)</label>
+                                <input type="text" asp-for="Amount" placeholder="0.00" value="@config.MinTransfer" class="form-control">
+                                <span asp-validation-for="Amount"></span>
+                                <input type="text" asp-for="WalletAddress" value="@wallet.WalletAddress" hidden>
+                                @*<label class="mt-15">Wallet Address</label>
+                                <input type="text" asp-for="WalletAddress" placeholder="" value="" class="form-control">
+                                <span asp-validation-for="WalletAddress"></span>*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Send Request</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive p-0" style="max-width:inherit;max-height:500px;">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Token Quantity</th>
+                                @*<th>Fee (Tige)</th>*@
+                                @*<th>Amount (ETH)</th>*@
+                                <th>Time</th>
+                                @*<th>Tx hash</th>*@
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                //var withdraws = (List<TransferRequestModel>)ViewBag.WithDraw;
+                                var withdraws = (IEnumerable<WithdrawRequestModel>)ViewBag.Transfers;
+                                withdraws = withdraws.Where(x => x.Status == Enums.WithdrawStatus.NewTransfer
+                                || x.Status == Enums.WithdrawStatus.ConfirmingTransfer
+                                || x.Status == Enums.WithdrawStatus.ApprovedTransfer
+                                || x.Status == Enums.WithdrawStatus.RejectTransfer);
+
+                                foreach (var withdraw in withdraws.OrderByDescending(x => x.CreatedTime))
+                                {
+                                    <tr>
+                                        <td data-label="ID">@withdraw.Id</td>
+                                        <td data-label="Amount (Tige)">
+                                            <span class="text-success">@withdraw.AmountUSD.ToString("###,###,###,###0.#####")</span>
+                                        </td>
+                                        @*<td data-label="Fee (Tige)">
+                                            <span class="text-success">@withdraw.FeeUSD.ToString("###,###,###,###0.#####")</span>
+                                        </td>*@
+                                        @*<td data-label="Amount (ETH)">
+                                            <span class="text-success">@withdraw.AmountETH.ToString("###,###,###,###0.######")</span>
+                                        </td>*@
+                                        <td data-label="Time">@withdraw.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        @*<td data-label="Tx hash" class="tx-hash">@withdraw.TxHash</td>*@
+                                        <td data-label="Status">@withdraw.Status.AsString(EnumFormat.DisplayName)</td>
+                                        @if (withdraw.Status != Enums.WithdrawStatus.ApprovedTransfer && withdraw.Status != Enums.WithdrawStatus.ConfirmingTransfer)
+                                        {
+                                            <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="deleteTransfer('@withdraw.Id')"><i class="fa fa-trash"></i></span></td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function deleteTransfer(id) {
+
+        var url = '@Url.Action("DeleteTransfer","StackWallet", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+</script>

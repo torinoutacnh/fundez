@@ -1,0 +1,212 @@
+﻿@using Elect.Web.IUrlHelperUtils
+@using TIGE.Core.Constants
+@using TIGE.Core.Share.Constants
+@using TIGE.Core.Share.Utils
+@using TIGE.Models.Constants
+@model TIGE.Core.Share.Models.User.StackUserModel
+@{
+    ViewData[ViewDataKey.Title] = Messages.User.PageTitleUpdate;
+}
+
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                Users
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.AbsoluteAction("Index", "User")" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Users
+                        </span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.AbsoluteAction("Edit", "User", new {id = Model.Id})" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Update User
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-users"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        Cập Nhật Tài Khoản
+                        <small>
+                            Cập Nhật Tài Khoản Trong Hệ Thống.
+                        </small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <form id="edit-user-form" asp-controller="User" asp-action="SubmitEdit" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="post" enctype="multipart/form-data" asp-antiforgery="true" role="form">
+            <input asp-for="Id" type="hidden"/>
+            <input asp-for="IsApp" type="hidden"/>
+            @if (Model.IsApp)
+            {
+                <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        <label asp-for="ListPermission" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <select asp-for="ListPermission" class="form-control" data-plugins="select2" asp-items="Html.GetEnumSelectList<Permission>()"></select>
+                            <span asp-validation-for="ListPermission" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        <label asp-for="Email" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="Email" type="email" class="form-control m-input" placeholder="Enter email">
+                            <span asp-validation-for="Email" class="form-control-feedback"></span>
+                        </div>
+
+                        <label asp-for="ListPermission" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <select asp-for="ListPermission" class="form-control" data-plugins="select2" asp-items="Html.GetEnumSelectList<Permission>()"></select>
+                            <span asp-validation-for="ListPermission" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <label asp-for="Phone" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="Phone" type="text" class="form-control m-input" placeholder="Enter phone">
+                            <span asp-validation-for="Phone" class="form-control-feedback"></span>
+                        </div>
+                        
+                        <label asp-for="AuthyId" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="AuthyId" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="AuthyId" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <label asp-for="FullName" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="FullName" type="text" class="form-control m-input" placeholder="Enter full name">
+                            <span asp-validation-for="FullName" class="form-control-feedback"></span>
+                        </div>                       
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <label asp-for="Balance" class="col-lg-2 col-form-label">Staking Wallet (TIGE)</label>
+                        <div class="col-lg-3">
+                            <input asp-for="Balance" type="text" class="form-control m-input" placeholder="0" readonly="readonly">
+                            <span asp-validation-for="Balance" class="form-control-feedback"></span>
+                        </div>
+
+                        <label asp-for="OldBalance" class="col-lg-2 col-form-label">Total Token (TIGE)</label>
+                        <div class="col-lg-3">
+                            <input asp-for="OldBalance" type="text" class="form-control m-input" placeholder="0" readonly="readonly">
+                            <span asp-validation-for="OldBalance" class="form-control-feedback"></span>
+                        </div>
+
+                    </div>
+                    
+                    <div class="form-group m-form__group row">
+                        <label asp-for="TotalDeposit" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="TotalDeposit" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="TotalDeposit" class="form-control-feedback"></span>
+                        </div>
+                        <label asp-for="TotalWithdraw" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="TotalWithdraw" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="TotalWithdraw" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-form__group row">
+                        <label asp-for="TotalTransfer" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="TotalTransfer" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="TotalTransfer" class="form-control-feedback"></span>
+                        </div>
+                        
+                        <label asp-for="TotalReward" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="TotalReward" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="TotalReward" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+
+                        <label asp-for="TotalDailyReward" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="TotalDailyReward" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="TotalDailyReward" class="form-control-feedback"></span>
+                        </div>
+                        <label asp-for="TotalFee" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="TotalFee" type="text" class="form-control m-input" readonly="readonly">
+                            <span asp-validation-for="TotalFee" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-form__group row">
+                        <label asp-for="IsBanned" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <label class="m-checkbox">
+                                <input asp-for="IsBanned" type="checkbox">
+                                <span></span>
+                            </label>
+                            @if (Model.IsBanned && Model.BannedTime.HasValue)
+                            {
+                                <span class="m-form__help d-block">
+                                    Banned at @Model.BannedTime.Value.ToString(Formattings.DateTimeFormat)
+                                </span>
+                            }
+                            <span asp-validation-for="IsBanned" class="form-control-feedback"></span>
+                        </div>
+
+                        <label asp-for="BannedRemark" class="col-lg-2 col-form-label"></label>
+                        <div class="col-lg-3">
+                            <input asp-for="BannedRemark" type="text" class="form-control m-input" placeholder="Enter banned remark">
+                            <span asp-validation-for="BannedRemark" class="form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions--solid">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <button type="submit" class="btn btn-success" data-plugins="loader">
+                                Save
+                            </button>
+                            <a href="@Url.Action("Resend", "User", new {id = Model.Id})" class="btn btn-warning">Resend Confirm Register</a>
+                            <a href="@Url.Action("Index", "User")" class="btn btn-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

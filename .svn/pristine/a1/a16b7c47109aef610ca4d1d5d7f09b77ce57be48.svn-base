@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TIGE.Core.Share</name>
+    </assembly>
+    <members>
+        <member name="T:TIGE.Core.Share.Attributes.Auth.CombineAuthAttribute">
+            <inheritdoc />
+            <summary>
+                Attribute to mark combine (OR conditional) with higher level AuthorizeAttribute 
+            </summary>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.ApplicationType.Native">
+            <summary>
+                Mobile or Desktop, apps that run native in a device. eg: Android, iOS, Desktop
+                Universal App.
+            </summary>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.ApplicationType.SinglePageWebApp">
+            <summary>
+                A javascript frontend app that uses an API. eg: AngularJS, ReactJS. 
+            </summary>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.ApplicationType.RegularWebApp">
+            <summary>
+                Traditional web app (with refresh). eg: PHP, Java, ASP .NET, .Net Core. 
+            </summary>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.ApplicationType.NonInteractiveClient">
+            <summary>
+                CLI, Daemons or Services running on your backend, background job. Not have UI and
+                interactive with end-user by any way.
+            </summary>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.CodeChallengeMethod.S256">
+            <summary>
+                SHA-256 code challenge method. 
+            </summary>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.CodeChallengeMethod.Plain">
+            <summary>
+                Plain code challenge method. 
+            </summary>
+        </member>
+        <member name="T:TIGE.Core.Share.Constants.ErrorCode">
+            <summary>
+                Unique Error Code
+            </summary>
+            <remarks>
+                Use "nameof(ErrorCode.Key)" to get unique code
+            </remarks>
+            <remarks>
+                Use ErrorCode.Key to get message
+            </remarks>
+        </member>
+        <member name="F:TIGE.Core.Share.Constants.Formattings.TimeZone">
+            <summary>
+                Config use datetime with TimeZone. Default is "UTC", See more: https://msdn.microsoft.com/en-us/library/gg154758.aspx 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Exceptions.ErrorModel.Code">
+            <summary>
+                Unique error code
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Exceptions.ErrorModel.Message">
+            <summary>
+                Message/Description of error
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Exceptions.ErrorModel.StatusCode">
+            <summary>
+                Http response code
+            </summary>
+        </member>
+        <member name="M:TIGE.Core.Share.Filters.Auth.FilterContextExtensions.IsAuthenticated(Microsoft.AspNetCore.Mvc.Filters.FilterContext)">
+            <summary>
+                Check user is authentication, also check AllowAnonymous attribute. 
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Core.Share.Filters.Auth.FilterContextExtensions.IsAuthorized(Microsoft.AspNetCore.Mvc.Filters.FilterContext)">
+            <summary>
+                Check user is authorization. Please call <see cref="M:TIGE.Core.Share.Filters.Auth.FilterContextExtensions.IsAuthenticated(Microsoft.AspNetCore.Mvc.Filters.FilterContext)" /> to check
+                authenticated before call this method.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.GrantType">
+            <summary>
+                GrantType must be ResourceOwner, Authorization Code (PKCE), RefreshToken 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.ClientSecret">
+            <summary>
+                Authorization Code 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.Email">
+            <summary>
+                Resource Owner Password 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.Password">
+            <summary>
+                Resource Owner Password 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.Code">
+            <summary>
+                AuthorizationCode 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.CodeVerifier">
+            <summary>
+                AuthorizationCode PKCE 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.RedirectUri">
+            <summary>
+                AuthorizationCode + Implicit 
+            </summary>
+        </member>
+        <member name="P:TIGE.Core.Share.Models.Authentication.RequestTokenModel.RefreshToken">
+            <summary>
+                RefreshToken 
+            </summary>
+        </member>
+    </members>
+</doc>

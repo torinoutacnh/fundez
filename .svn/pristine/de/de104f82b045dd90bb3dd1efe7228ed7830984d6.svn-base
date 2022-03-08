@@ -1,0 +1,159 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Models.Token
+@using TIGE.Core.Share.Utils
+@using Enums = TIGE.Core.Share.Constants.Enums
+@inject IConfigurationService ConfigurationService
+@{
+    var config = ConfigurationService.GetConfig();
+    var tokens  = (List<DetailSellTokenModel>)ViewBag.Tokens;
+}
+
+@model SubmitTokenModel
+
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Convert Token </span> <b class="base--color">Request</b></h2>
+                    <p>You must know the calculation before investing in any plan, so you never make mistakes. Check the calculation and you will get as our calculator says.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="SubmitSellToken" method="post"  >
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label>Tokens</label>
+                                <div>
+                                    <h2>@(ViewBag.CurrentToken.ToString("##,###,###,###0.##"))</h2>
+                                </div>
+                                @*<input type="text" value="@LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>   
+                            <div class="col-lg-12 mb-30">
+                                <label>Price Tige (USD)</label>
+                                <div>
+                                    <h2 id="price-value"></h2>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12 mb-30">
+                                <label>Convert Token</label>
+                                <input type="text" asp-for="Quantity" placeholder="0" class="form-control" onchange="calculating(this)">
+                                <span asp-validation-for="Quantity"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Fee (USD)</label>
+                                <div>
+                                    <h2 id="fee-value"></h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>You will get (USD)</label>
+                                <div>
+                                    <h2 id="total-value"></h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Confirm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive--md p-0">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Token Quantity (TIGE)</th>
+                            <th>Unit Price (USD)</th>
+                            <th>Fee Amount (USD)</th>
+                            <th>Total Amount (USD)</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @{
+
+                            foreach (var Token in tokens.OrderByDescending(x=>x.CreatedTime))
+                            {
+                                <tr>
+                                    <td data-label="ID">@Token.Id</td>
+                                    <td data-label="Token Quantity (TIGE)">
+                                        <span class="text-success">@Token.TokenQuantity.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Unit Price (USD)">
+                                        <span class="text-success">@Token.UnitPrice.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Fee Price (USD)">
+                                        <span class="text-success">@Token.FeeAmount.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Total Amount (USD)">
+                                        <span class="text-success">@Token.TotalAmount.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Time">@Token.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                    <td data-label="Time">@Token.Status.AsString(EnumFormat.DisplayName)</td>
+                                    @if (Token.Status == Enums.TokenStatus.New)
+                                    {
+                                        <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="deleteItem('@Token.Id')" ><i class="fa fa-trash"></i></span></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function() {
+        sendData(0);
+    });
+
+    function calculating(sender) {
+        var quantity = $(sender).val();
+        sendData(quantity);
+    }
+
+    function sendData(quantity) {
+        var url = "/api/tokens/cal/" + quantity;
+        $.get(url, function( data ) {
+
+            $("#price-value").text(data.unitPrice);
+            $("#total-value").text(data.totalAmount);
+            $("#fee-value").text(data.feeAmount);
+        });
+    }
+
+    function deleteItem(id) {
+
+        var url = '@Url.Action("Delete","Token", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+</script>

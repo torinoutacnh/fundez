@@ -1,0 +1,101 @@
+﻿@model TIGE.Core.Share.Models.ProtectionFee.CreateProtectionFeeModel
+
+@{
+    ViewData[ViewDataKey.Title] = Messages.ProtectionFee.PageTitleAdd;
+}
+
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                Protection Fees
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.AbsoluteAction("Index", "ProtectionFee")" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Protection Fees
+                        </span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.AbsoluteAction("Add", "ProtectionFee")" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            New ProtectionFee
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-ProtectionFees"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                         Protection Fee
+                        <small>
+                            Thêm mới Protection Fee
+                        </small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <form id="new-ProtectionFee-form" asp-controller="ProtectionFee" asp-action="SubmitAdd" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="post" enctype="multipart/form-data" asp-antiforgery="true" role="form">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <label asp-for="From" class="col-lg-2 col-form-label"></label>
+                    <div class="col-lg-3">
+                        <input asp-for="From" type="number" class="form-control m-input" placeholder="Enter From Amount">
+                        <span asp-validation-for="From" class="form-control-feedback"></span>
+                    </div>
+
+                    <label asp-for="To" class="col-lg-2 col-form-label"></label>
+                    <div class="col-lg-3">
+                        <input asp-for="To" type="number" class="form-control m-input" placeholder="Enter To Amount">
+                        <span asp-validation-for="To" class="form-control-feedback"></span>
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <label asp-for="Fee" class="col-lg-2 col-form-label">Fee (Percent)</label>
+                    <div class="col-lg-3">
+                        <input asp-for="Fee" type="number" class="form-control m-input" placeholder="Enter Fee (Percent)">
+                        <span asp-validation-for="Fee" class="form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions--solid">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <button type="submit" class="btn btn-success" data-plugins="loader">
+                                Save
+                            </button>
+                            <a href="@Url.Action("Index", "ProtectionFee")" class="btn btn-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "LNJ2xpo4Urd6/07YygmcoZ1nQfD9HJaAZPq5PuUMgG+jPEFzyIKSLFYdTLg60A3sd3/a8GiXEFKMcZbe8fLt3Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\torin\\Desktop\\Fundez\\JustConsole\\JustConsole\\JustConsole.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\torin\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

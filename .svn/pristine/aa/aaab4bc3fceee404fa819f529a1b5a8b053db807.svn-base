@@ -1,0 +1,224 @@
+﻿@model TIGE.Core.Models.Configuration.ConfigurationModel
+
+@{
+    ViewData["Title"] = "Cấu Hình Hệ Thống";
+}
+
+<style>
+    .config-page .form-group {
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+
+</style>
+<div class="container">
+
+    <h2>SYSTEM CONFIGURATION</h2>
+    <form asp-controller="Config" asp-action="UpdateConfig" method="post">
+        <input type="hidden" asp-for="Id" />
+        <hr />
+        <div class="config-page">
+            <div class="form-group m-form__group row">
+                <label asp-for="TotalDepositWallet" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="TotalDepositWallet" type="text" class="form-control m-input" placeholder="Address">
+                    <span asp-validation-for="TotalDepositWallet" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="SlotPrice" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="SlotPrice" type="number" class="form-control m-input" placeholder="Amount (USD)">
+                    <span asp-validation-for="SlotPrice" class="form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                <label asp-for="SlotToToken" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="SlotToToken" type="number" class="form-control m-input" placeholder="Number Tokens per 1 slot">
+                    <span asp-validation-for="SlotToToken" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="TokenPrice" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="TokenPrice" type="number" class="form-control m-input" placeholder="Amount (USD)">
+                    <span asp-validation-for="TokenPrice" class="form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                <label asp-for="MinWithdraw" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="MinWithdraw" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="MinWithdraw" class="form-control-feedback"></span>
+                </div>
+            </div>
+            
+            <div class="form-group m-form__group row">
+                <label asp-for="SupportEmail" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="SupportEmail" type="email" class="form-control m-input" placeholder="Support Email">
+                    <span asp-validation-for="SupportEmail" class="form-control-feedback"></span>
+                </div>
+            </div>
+            
+            <div class="form-group m-form__group row">
+                <label asp-for="TelegramLink" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="TelegramLink" type="text" class="form-control m-input" placeholder="Telegram Link">
+                    <span asp-validation-for="TelegramLink" class="form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                <label asp-for="TIGEChartRange" class="col-lg-4 col-form-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="TIGEChartRange" type="text" class="form-control m-input" placeholder="Telegram Link">
+                    <span asp-validation-for="TIGEChartRange" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level1" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level1" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level1" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel1" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel1" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel1" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level2" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level2" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level2" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel2" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel2" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel2" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level3" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level3" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level3" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel3" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel3" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel3" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level4" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level4" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level4" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel4" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel4" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel4" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level5" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level5" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level5" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel5" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel5" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel5" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level6" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level6" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level6" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel6" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel6" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel6" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level7" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level7" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level7" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel7" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel7" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel7" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level8" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level8" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level8" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel8" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel8" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel8" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level9" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level9" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level9" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel9" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel9" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel9" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group m-form__group row">
+                <label asp-for="Level10" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="Level10" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="Level10" class="form-control-feedback"></span>
+                </div>
+                <label asp-for="ConditionLevel10" class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-3">
+                    <input asp-for="ConditionLevel10" type="number" class="form-control m-input" placeholder="Min Withdraw">
+                    <span asp-validation-for="ConditionLevel10" class="form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group m-form__group">
+
+                <button class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+    
+

@@ -1,0 +1,187 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Repository.Models.Stacking
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Constants
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Models.Slot
+@using TIGE.Core.Share.Models.Stack
+@using TIGE.Core.Share.Utils
+@using Enums = TIGE.Core.Share.Constants.Enums
+@inject IStackConfigService ConfigurationService
+@{
+    var config = ConfigurationService.GetConfig();
+    var wallet = (StackingWalletEntity)ViewBag.Wallet;
+    var subscriptions = (List<SubscriptionEntity>)ViewBag.Subscriptions;
+    if (subscriptions != null)
+    {
+        subscriptions = subscriptions.OrderByDescending(x => x.Reward).ToList();
+    }
+}
+
+@model SubmitStackModel
+
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Stake </span> <b class="base--color">Request</b></h2>
+                    <p>You must know the calculation before investing in any plan, so you never make mistakes. Check the calculation and you will get as our calculator says.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="SubmitStacking" method="post">
+                        <div class="row mb-none-30">
+                            <table class="table" style="color: white">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Description</th>
+                                        <th>Reward</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 1;
+                                        foreach (var subscription in subscriptions)
+                                        {
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@subscription.Description</td>
+                                                <td>@subscription.Reward %</td>
+                                            </tr>
+                                            i++;
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="col-lg-12 mb-30">
+                                <label>Staking Wallet</label>
+                                <div>
+                                    <h2>@wallet.Balance.ToString("##,###,###,###0.##")</h2>
+                                </div>
+                                @*<input type="text" value="@LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Min Staking (TIGE)</label>
+                                <div>
+                                    <h2>@config.MinStacking</h2>
+                                </div>
+                                @*<input type="text" value="@config.SlotPrice.ToString("##,###,###,###0.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Amount Tige</label>
+                                <input type="text" asp-for="AmountTige" placeholder="0" class="form-control" value="@config.MinStacking">
+                                <span asp-validation-for="AmountTige"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30 mr-5">
+                                @*<label>Day</label>*@   
+                                <div class="row">
+                                
+                                    @{
+                                        for (i = 0; i < Math.Ceiling((decimal)subscriptions.Count()/4); i++)
+                                        {
+                                            foreach (var subscription in subscriptions.Skip(i*4).Take(4))
+                                            {
+                                                <div class="col-md-3" style="text-align:left;">
+                                                <input type="radio" asp-for="Day" placeholder="0" value="@subscription.Day">
+                                                <label style="color:#cca354">@subscription.Day Days</label>
+                                                    
+                                                </div>
+                                            }
+                                        }
+                                    }    
+                                </div>
+
+                                <span asp-validation-for="Day"></span>
+
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Start Staking</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                @*<div class="table-responsive--md p-0">*@
+                  <div class="table-responsive p-0" style="max-width:inherit;max-height:500px;">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Stake Amount</th>
+                                <th>Daily Reward</th>
+                                <th>Total Reward</th>
+                                <th>Days</th>
+                                <th>Date Start</th>
+                                <th>Date End</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                if (wallet.StackHistories != null)
+                                {
+                                    foreach (var history in wallet.StackHistories.OrderByDescending(x => x.CreatedTime))
+                                    {
+                                        <tr>
+                                            <td data-label="ID">@history.Id</td>
+                                            <td data-label="Stake Amount">
+                                                <span>@history.StackAmount.ToString("###,###,###,###0.##")</span>
+                                            </td>
+                                            <td data-label="Daily Reward">
+                                                <span class="text-success">@history.DailyReward.ToString("###,###,###,###0.##")</span>
+                                            </td>
+                                            <td data-label="Total Reward">@history.TotalReward.ToString("###,###,###,###0.##")
+                                            </td>
+                                            <td data-label="Days">@history.Day</td>
+                                            <td data-label="Date Start" class="text-success">@history.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                            <td data-label="Date End" class="text-success">@history.DateEnd.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                            <td data-label="Status">@history.Status.AsString(EnumFormat.DisplayName)</td>
+                                            @if (history.Status == Enums.StackState.New)
+                                        {
+                                            <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="DeleteStack('@history.Id')" ><i class="fa fa-trash"></i></span></td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function DeleteStack(id) {
+            
+        var url = '@Url.Action("Delete","StackSubscription", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+            
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload()
+            }
+        });
+    }
+
+</script>

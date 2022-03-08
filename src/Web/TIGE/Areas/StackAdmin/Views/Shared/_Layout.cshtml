@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    @{
+        await Html.RenderPartialAsync("_Meta").ConfigureAwait(true);
+        await Html.RenderPartialAsync("_Favicon").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_TopScript").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_Style").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_Dropzone").ConfigureAwait(true);
+    }
+    @await RenderSectionAsync("Styles", required: false).ConfigureAwait(true)
+    
+   
+</head>
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside-left--fixed m-aside-left--offcanvas m-aside-left--minimize m-brand--minimize m-footer--push m-aside--offcanvas-default">
+<div class="m-grid m-grid--hor m-grid--root m-page">
+    @{
+        await Html.RenderPartialAsync("Menu/_Header").ConfigureAwait(true);
+    }
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+        @{
+            await Html.RenderPartialAsync("Menu/_Navigation").ConfigureAwait(true);
+        }
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+    @{
+        //await Html.RenderPartialAsync("Menu/_Footer").ConfigureAwait(true);
+    }
+</div>
+@{
+    await Html.RenderPartialAsync("Menu/_Sidebar").ConfigureAwait(true);
+    await Html.RenderPartialAsync("Assets/_BottomScript").ConfigureAwait(true);
+}
+@await RenderSectionAsync("Scripts", required: false).ConfigureAwait(true)
+</body>
+</html>

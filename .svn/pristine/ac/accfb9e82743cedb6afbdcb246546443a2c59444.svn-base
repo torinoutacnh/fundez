@@ -1,0 +1,91 @@
+﻿using Elect.Data.EF.Interfaces.DbContext;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using System;
+using System.Linq;
+using TIGE.Contract.Repository.Interfaces;
+using TIGE.Contract.Repository.Models.Stacking;
+using TIGE.Contract.Repository.Models.User;
+using TIGE.Core.Share.Constants;
+using TIGE.Repository;
+
+namespace StakeConsole
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //setup our DI
+            var serviceProvider = new ServiceCollection()
+                .AddTigeDbContext()
+                .AddMemoryCache()
+                .AddScoped<IRepository<HistoryRefundEntity>, Repository<HistoryRefundEntity>>()
+                .AddScoped<IRepository<StackHistoryEntity>, Repository<StackHistoryEntity>>()
+                .AddScoped<IRepository<StackingWalletEntity>, Repository<StackingWalletEntity>>()
+                .AddScoped<IRepository<UserEntity>, Repository<UserEntity>>()
+                .BuildServiceProvider();
+
+            //configure console logging
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+            //do the actual work here
+            string _cacheKeyPrefix = "User_";
+            string _dashboardCacheKey = "StackDashboard_";
+
+            Log.Logger.Information($"Program start at {DateTimeOffset.Now}");
+
+            using(var db = serviceProvider.GetRequiredService<IDbContext>())
+            {
+                var cache = serviceProvider.GetRequiredService<IMemoryCache>();
+                var rewards = serviceProvider.GetRequiredService<IRepository<HistoryRefundEntity>>();
+                var Stakcs = serviceProvider.GetRequiredService<IRepository<StackHistoryEntity>>();
+                var Wallets = serviceProvider.GetRequiredService<IRepository<StackingWalletEntity>>();
+                var Users = serviceProvider.GetRequiredService<IRepository<UserEntity>>();
+
+                var stacks = Stakcs.Get(x => x.Status == Enums.StackState.Staking);
+                var walletids = stacks.Select(x => x.WalletId).ToList();
+                var userids = Wallets.Get(x => walletids.Contains(x.Id)).Select(x => x.UserId);
+
+                Log.Logger.Information($"{DateTimeOffset.Now} - Reward section");
+                var todayRewards = rewards.Get(x => x.CreatedTime > DateTime.Today);
+                foreach (var stack in stacks)
+                {
+                    if (stack.DateEnd < DateTimeOffset.Now)
+                    {
+                        stack.Status = Enums.StackState.Finished;
+                        Stakcs.Update(stack, x => x.Status);
+                    }
+                    else
+                    {
+                        var count = todayRewards.Where(x => x.FromStack == stack.Id).Count();
+                        if (count == 0)
+                        {
+                            var refund = new HistoryRefundEntity()
+                            {
+                                WalletId = stack.WalletId,
+                                Amount = stack.DailyReward,
+                                Rate = 1,
+                                FromStack = stack.Id,
+                            };
+                            rewards.Add(refund);
+
+                            Log.Logger.Information($"{DateTimeOffset.Now} - Id:{refund.Id} from stakeId {stack.Id}");
+                        }
+                    }
+                }
+                db.SaveChanges();
+                foreach (var userid in userids)
+                {
+                    cache.Remove(_cacheKeyPrefix + userid);
+                    cache.Remove(_dashboardCacheKey + userid);
+                }
+            }
+
+            Log.Logger.Information($"Program finish at {DateTimeOffset.Now}");
+        }
+    }
+}

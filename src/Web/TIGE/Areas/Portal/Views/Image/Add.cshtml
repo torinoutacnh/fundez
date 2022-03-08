@@ -1,0 +1,108 @@
+﻿@model ImageModel
+@{
+    ViewData[ViewDataKey.Title] = Messages.Image.PageTitleAdd;
+
+    var listProject = ViewBag.ProjectSelectList as List<SelectListItem>;
+    var listCategory = ViewBag.CategorySelectList as List<SelectListItem>;
+}
+
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                Images
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.Action("Index", "Image")" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Images
+                        </span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.Action("Add", "Image")" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            New Image
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-file"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        New Image
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <label asp-for="ProjectId" class="col-lg-2 col-form-label"></label>
+                    <div class="col-lg-3">
+                        <select asp-for="ProjectId" class="form-control" asp-items="@listProject" data-plugins="select2"></select>
+                        <span asp-validation-for="ProjectId" class="form-control-feedback"></span>
+                    </div>
+                    <label asp-for="CategoryIds" class="col-lg-2 col-form-label"></label>
+                    <div class="col-lg-3">
+                        <select asp-for="CategoryIds" class="form-control" asp-items="@listCategory" multiple="multiple" data-plugins="select2"></select>
+                        <span asp-validation-for="CategoryIds" class="form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <div data-plugins="dropzone" data-dropzone-urls="#urls" data-max-file="100" data-uploaded-callback="onUploaded"></div>
+                        <input type="hidden" id="urls" value=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function onUploaded(fileInfo) {
+           
+            var url = global.endpoint.page.image.edit.replace(/PARAMETER_ID/g, fileInfo.id);
+            console.log(fileInfo);
+            var imageInfo = {
+                id: fileInfo.id,
+                name: fileInfo.name,
+                projectId: $("#ProjectId").val(),
+                categoryIds: $("#CategoryIds").val()
+            };
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: imageInfo,
+                success: function() {
+                    // Ignore
+                }
+            });
+        }
+    </script>
+}

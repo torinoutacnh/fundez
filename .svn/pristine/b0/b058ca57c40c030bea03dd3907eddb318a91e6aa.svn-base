@@ -1,0 +1,62 @@
+﻿@{
+    var backgroundUrl = Url.AbsoluteContent("~/TNImages/background.jpg"); // "https://source.unsplash.com/collection/763795/1024x768"
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-2505110924325095",
+            enable_page_level_ads: true
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_Meta").ConfigureAwait(true);
+        await Html.RenderPartialAsync("_Favicon").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_TopScript").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_Style").ConfigureAwait(true);
+    }
+    @await RenderSectionAsync("Styles", required: false).ConfigureAwait(true)
+</head>
+<body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin" id="m_login">
+            <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+                @{
+                    @RenderBody()
+                }
+            </div>
+
+            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content" style="background-color: #261d35; background-image: url(@backgroundUrl)">
+                <div class="m-grid__item m-grid__item--middle">
+                    <h3 class="m-login__welcome">
+                        FUNDEZ.CO System
+                    </h3>
+                    <p class="m-login__msg" id="qoute">
+                        Không gian chỉ là khái niệm, Kiến trúc là vô tận
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{
+        await Html.RenderPartialAsync("Assets/_BottomScript").ConfigureAwait(true);
+    }
+    @await RenderSectionAsync("Scripts", required: false).ConfigureAwait(true)
+    <script type="text/javascript">
+        //$(function () {
+        //    $.ajax({
+        //        method: "GET",
+        //        url: 'https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
+        //        success: function (data) {
+        //            var post = data.shift();
+        //            $("#qoute").html(post.content + "<p>&mdash; " + post.title + "</p>");
+        //        },
+        //        cache: false
+        //    });
+        //})
+    </script>
+</body>
+</html>

@@ -1,0 +1,2096 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- Information -->
+  <PropertyGroup>
+    <Authors>Linh Nguyen</Authors>
+    <Copyright>http://topnguyen.net</Copyright>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <DocumentationFile>TIGE.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
+    <LangVersion>7.2</LangVersion>
+    <!-- Output -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>.\bin\</OutputPath>
+  </PropertyGroup>
+  <!-- Copy to Ouput -->
+  <ItemGroup>
+    <Content Include="wwwroot\**\*;Views\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Remove="wwwroot\**\*.scss" />
+    <Content Include="Areas\Portal\wwwroot\**\*;Areas\Portal\Views\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Remove="wwwroot\Catalog\**" />
+    <Content Remove="Areas\Portal\wwwroot\**\*.scss" />
+    <Content Remove="wwwroot\Catalog\**" />
+    <EmbeddedResource Remove="wwwroot\Catalog\**" />
+    <None Remove="wwwroot\Catalog\**" />
+    <None Remove="Areas\Portal\Views\Business\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Business\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\ProtectionFee\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\ProtectionFee\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyBuyStack.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyDepositStack.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifySellToken.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyTransferTige.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyWithDrawStack.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyWithDrawTige.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyWithDrawUSDStack.cshtml" />
+    <None Remove="Areas\Portal\Views\Token\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Token\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Slot\Add.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_UpdateProfile.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyBuySlot.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyDeposit.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyWithDraw.cshtml" />
+    <None Remove="Areas\Portal\Views\Slot\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Slot\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\EditWithdraw.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\Withdraw.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\WithdrawTige.cshtml" />
+    <None Remove="Areas\Portal\wwwroot\img\background.jpg" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Assets\_BottomScript.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Assets\_Dropzone.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Assets\_Style.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Assets\_TopScript.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\DataTable\_DataTableHtml.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\DataTable\_DataTableScript.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Footer.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Header.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Header\_AppHeader.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Header\_BrandHeader.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Header\_LeftHeader.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Header\_LoggedInUser.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Header\_NotificationHeader.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Navigation.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\Menu\_Sidebar.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\_AnonymousLayout.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\_Layout.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\Shared\_Meta.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-4.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-6-bk.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-7.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg-8.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg_banner-2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg_banner.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg_banner.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\bg_menu.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\bg\hero.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\blog\1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\blog\2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\blog\3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\1.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\2.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\3.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\4.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\5.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\6.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\7.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\brand\8.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\favicon.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\7.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\investor\8.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\logo.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\testimonial\1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\testimonial\2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\testimonial\3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\images\testimonial\4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\img\background.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\img\sketch-underline-green.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\img\sketch-underline-purple.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\img\_background.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\index.html" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\inner.html" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\js\core.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\login.html" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\Readme.md" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\scss\style.css" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\js\dashboard.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\js\layout-builder.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-6.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-7.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo1.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo2.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo3.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo4.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo5.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\envato\screen1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\envato\screen2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\css.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\csv.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\doc.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\html.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\javascript.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\jpg.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\mp4.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\pdf.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\xml.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\zip.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\exchange.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\logout.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\question.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\warning.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo-1.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo-2.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo-3.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_client_color.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_client_white.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_invoice_dark.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_invoice_white.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\misc\notification_bg.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\misc\quick_actions_bg.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\misc\user_profile_bg.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product10.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product11.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product7.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product8.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product9.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_10.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_11.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_12.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_13.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_14.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_7.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_8.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_9.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_10.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_11.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_12.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_13.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_14.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_6.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_7.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_8.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_9.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user1.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user2.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user3.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user4.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user5.jpg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\media\img\logo\favicon.ico" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\media\img\logo\logo.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\skin\base\scripts.bundle.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\skin\base\style.bundle.css" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\snippets\apps\mail\mail.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\snippets\custom\apps\mail\mail.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\snippets\custom\pages\user\login.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.eot" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.ttf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.woff" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.eot" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.ttf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.woff" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.woff2" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\FontAwesome.otf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.eot" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.ttf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.woff" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.woff2" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.eot" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.ttf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.woff" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.woff2" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.eot" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.svg" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.ttf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.woff" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\summernote\summernote.eot" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\summernote\summernote.ttf" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\summernote\summernote.woff" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\ion-rangeslider\sprite-skin-flat.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\jstree\32px.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\jstree\40px.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\jstree\throbber.gif" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\malihu-custom-scrollbar-plugin\mCSB_buttons.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\vendors.bundle.css" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\vendors.bundle.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\flot\flot.bundle.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\fullcalendar\fullcalendar.bundle.css" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\fullcalendar\fullcalendar.bundle.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\gmaps\gmaps.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\jquery-ui.bundle.css" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\jquery-ui.bundle.js" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jqvmap\jqvmap.bundle.css" />
+    <None Remove="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jqvmap\jqvmap.bundle.js" />
+    <None Remove="Areas\StackAdmin\Views\_ViewImports.cshtml" />
+    <None Remove="Areas\StackAdmin\Views\_ViewStart.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\About.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\Index.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\PageNotFound.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\Policy.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\Privacy.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\TermCondition.cshtml" />
+    <None Remove="Areas\Stack\Views\Home\_ListCard.cshtml" />
+    <None Remove="Areas\Stack\Views\Profile\ConfirmProfile.cshtml" />
+    <None Remove="Areas\Stack\Views\Profile\Index.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\Assets\_BottomScript.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\Assets\_Style.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\Assets\_TopScript.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\_Favicon.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\_Layout.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\_LayoutStacking.cshtml" />
+    <None Remove="Areas\Stack\Views\Shared\_Meta.cshtml" />
+    <None Remove="Areas\Stack\Views\StackingWallet\Index.cshtml" />
+    <None Remove="Areas\Stack\Views\StackingWallet\Withdraw.cshtml" />
+    <None Remove="Areas\Stack\Views\StackSubscription\Index.cshtml" />
+    <None Remove="Areas\Stack\Views\StackSubscription\Reward.cshtml" />
+    <None Remove="Areas\Stack\Views\_ViewImports.cshtml" />
+    <None Remove="Areas\Stack\Views\_ViewStart.cshtml" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\alert\dark.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\all.min.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\line-awesome.min.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\main.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\main.css.map" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\vendor\animate.min.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\vendor\bootstrap.min.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\vendor\bootstrap.min.css.map" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\vendor\dots.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\css\vendor\slick.css" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\Flaticon.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\Flaticon.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\Flaticon.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\Flaticon.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\Flaticon.woff2" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-brands-400.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-brands-400.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-brands-400.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-brands-400.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-brands-400.woff2" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-regular-400.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-regular-400.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-regular-400.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-regular-400.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-regular-400.woff2" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-solid-900.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-solid-900.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-solid-900.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-solid-900.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\la-solid-900.woff2" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\lightcase.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\lightcase.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\lightcase.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\fonts\lightcase.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-3.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-4.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-5.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-6-bk.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-6.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-7.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg-8.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg_banner-2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg_banner.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg_banner.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\bg_menu.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\bg\hero.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\blog\1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\blog\2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\blog\3.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\1.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\2.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\3.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\4.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\5.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\6.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\7.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\brand\8.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\favicon.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\3.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\4.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\5.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\6.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\7.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\investor\8.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\logo.png" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\testimonial\1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\testimonial\2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\testimonial\3.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\images\testimonial\4.jpg" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\app.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\contact.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\sweetalert2.min.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\vendor\bootstrap.bundle.min.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\vendor\bootstrap.bundle.min.js.map" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\vendor\jquery-3.5.1.min.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\vendor\slick.min.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\js\vendor\wow.min.js" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\abstracts\_mixins.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\abstracts\_variables.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\base\_base.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\base\_reset.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\base\_typography.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\components\_buttons.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\components\_form.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\components\_keyframes.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\components\_table.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\layout\_footer.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\layout\_header.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\layout\_hero-section.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\layout\_sections.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\layout\_sidebar.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\sass\main.sass" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.woff2" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.woff2" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.eot" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.svg" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.ttf" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.woff" />
+    <None Remove="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.woff2" />
+    <None Remove="Areas\Stack\wwwroot\css\bootstrap.css" />
+    <None Remove="Areas\Stack\wwwroot\css\bootstrap.css.map" />
+    <None Remove="Areas\Stack\wwwroot\css\core.css" />
+    <None Remove="Areas\Stack\wwwroot\css\main.css" />
+    <None Remove="Areas\Stack\wwwroot\css\main.css.map" />
+    <None Remove="Areas\Stack\wwwroot\images\1-nature.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\10-people.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\11-people.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\13-people.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\14-people.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\16-people.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\17-people.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\18-computer.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\19-computer.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\2-nature.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\20-computer.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\23-computer.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\24-computer.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\26-food.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\27-food.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\28-food.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\29-food.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\30-food.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\4-nature.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\5-nature.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\8-nature.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\9-nature.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\about-img-1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\about-img-2.png" />
+    <None Remove="Areas\Stack\wwwroot\images\about-img-3.png" />
+    <None Remove="Areas\Stack\wwwroot\images\about-img-4.png" />
+    <None Remove="Areas\Stack\wwwroot\images\about-img-5.png" />
+    <None Remove="Areas\Stack\wwwroot\images\blog-1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\blog-2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\blog-3.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\blog-4.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\face-1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\face-2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\face-3.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\face-4.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\face-5.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\favicon.png" />
+    <None Remove="Areas\Stack\wwwroot\images\image-detail.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\photo-perfect-screenshot.png" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_032e399e04de48e1b6c532c10bd55ac2.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_1f955d88be014230854c2e35cf558c24.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_22293e94531046ef9dad0e77eeb48441.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_365bc781cf6f4b5c814f8839a81fbefb.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_429ec5edd3a14a7ba7e159323419ad45.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_4e8b2cffd4e945e6a2e1bb0bdc715f50.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_60aca20717be4fd7bf2811358bc55cef.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_83c390494ca54f7b83f86c1b632e6b06.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_952ccddf691d403ca0ba6a5f132c4f69.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_9ab881aa836b417b8f7540280962fa6c.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_ab3cb38621474d3baafe2a5bb3821b2c.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_ae24f422fadf4b5a9fa8a018d81214d5.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\QrCode_d486fd8c69a34eacb7a73d057a2dcbc1.jpg" />
+    <None Remove="Areas\Stack\wwwroot\images\QR\ThankAuthy.jpg" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\android-chrome-192x192.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\android-chrome-512x512.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\apple-touch-icon.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\browserconfig.xml" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\favicon-16x16.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\favicon-32x32.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\favicon.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\logo.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\mstile-150x150.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\android-chrome-192x192.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\android-chrome-512x512.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\apple-touch-icon.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\favicon-16x16.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\favicon-32x32.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\favicon.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\logo.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\New Logo\mstile-150x150.png" />
+    <None Remove="Areas\Stack\wwwroot\img\favicon\site.webmanifest" />
+    <None Remove="Areas\Stack\wwwroot\js\bootstrap.js" />
+    <None Remove="Areas\Stack\wwwroot\js\bootstrap.js.map" />
+    <None Remove="Areas\Stack\wwwroot\js\bootstrap.min.js" />
+    <None Remove="Areas\Stack\wwwroot\js\bootstrap.min.js.map" />
+    <None Remove="Areas\Stack\wwwroot\js\carousel.js" />
+    <None Remove="Areas\Stack\wwwroot\js\core.js" />
+    <None Remove="Areas\Stack\wwwroot\js\jquery-1.11.1.js" />
+    <None Remove="Areas\Stack\wwwroot\js\jquery-3.3.1.min.js" />
+    <None Remove="Areas\Stack\wwwroot\js\main.js" />
+    <None Remove="Areas\Stack\wwwroot\js\webfont.js" />
+    <None Remove="Areas\Stack\wwwroot\Readme.md" />
+    <None Remove="Areas\Stack\wwwroot\TNImages\background.jpg" />
+    <None Remove="Areas\Stack\wwwroot\TNImages\logo.png" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.dataTables\buttons.colVis.min.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.dataTables\dataTables.buttons.min.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.dataTables\dataTables.colReorder.min.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.dataTables\jquery.dataTables.columnFilter.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.dataTables\jquery.dataTables.columnFilter.min.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.dataTables\jquery.dataTables.min.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.validate\jquery.validate.unobtrusive.js" />
+    <None Remove="Areas\Stack\wwwroot\vendor\jquery.validate\jquery.validate.unobtrusive.min.js" />
+    <None Remove="Views\Auth\Authorized.cshtml" />
+    <None Remove="Views\Auth\ConfirmEmail.cshtml" />
+    <None Remove="Views\Auth\ForgetPassword.cshtml" />
+    <None Remove="Views\Auth\SetPassword.cshtml" />
+    <None Remove="Views\Auth\SignIn.cshtml" />
+    <None Remove="Views\Auth\UnAuthorize.cshtml" />
+    <None Remove="Views\Auth\VeryfySignIn.cshtml" />
+    <None Remove="Views\Home\Policy.cshtml" />
+    <None Remove="Views\Home\Privacy.cshtml" />
+    <None Remove="Views\Home\TermCondition.cshtml" />
+    <None Remove="Views\Profile\ConfirmProfile.cshtml" />
+    <None Remove="Views\Shared\Assets\_LayoutStacking.cshtml" />
+    <None Remove="Views\Token\Confirm.cshtml" />
+    <None Remove="Views\Token\Index.cshtml" />
+    <None Remove="Views\Slot\Index.cshtml" />
+    <None Remove="Views\Business\Index.cshtml" />
+    <None Remove="Views\Verify\Verify.cshtml" />
+    <None Remove="Views\Wallet\ConfirmDeposit.cshtml" />
+    <None Remove="Views\Wallet\Withdraw.cshtml" />
+    <None Remove="wwwroot\assets\css\alert\dark.css" />
+    <None Remove="wwwroot\assets\js\sweetalert2.min.js" />
+    <None Remove="wwwroot\css\bootstrap.css" />
+    <None Remove="wwwroot\css\bootstrap.css.map" />
+    <None Remove="wwwroot\css\main.css" />
+    <None Remove="wwwroot\css\main.css.map" />
+    <None Remove="wwwroot\images\1-nature.jpg" />
+    <None Remove="wwwroot\images\10-people.jpg" />
+    <None Remove="wwwroot\images\11-people.jpg" />
+    <None Remove="wwwroot\images\13-people.jpg" />
+    <None Remove="wwwroot\images\14-people.jpg" />
+    <None Remove="wwwroot\images\16-people.jpg" />
+    <None Remove="wwwroot\images\17-people.jpg" />
+    <None Remove="wwwroot\images\18-computer.jpg" />
+    <None Remove="wwwroot\images\19-computer.jpg" />
+    <None Remove="wwwroot\images\2-nature.jpg" />
+    <None Remove="wwwroot\images\20-computer.jpg" />
+    <None Remove="wwwroot\images\23-computer.jpg" />
+    <None Remove="wwwroot\images\24-computer.jpg" />
+    <None Remove="wwwroot\images\26-food.jpg" />
+    <None Remove="wwwroot\images\27-food.jpg" />
+    <None Remove="wwwroot\images\28-food.jpg" />
+    <None Remove="wwwroot\images\29-food.jpg" />
+    <None Remove="wwwroot\images\30-food.jpg" />
+    <None Remove="wwwroot\images\4-nature.jpg" />
+    <None Remove="wwwroot\images\5-nature.jpg" />
+    <None Remove="wwwroot\images\8-nature.jpg" />
+    <None Remove="wwwroot\images\9-nature.jpg" />
+    <None Remove="wwwroot\images\about-img-1.jpg" />
+    <None Remove="wwwroot\images\about-img-2.png" />
+    <None Remove="wwwroot\images\about-img-3.png" />
+    <None Remove="wwwroot\images\about-img-4.png" />
+    <None Remove="wwwroot\images\about-img-5.png" />
+    <None Remove="wwwroot\images\blog-1.jpg" />
+    <None Remove="wwwroot\images\blog-2.jpg" />
+    <None Remove="wwwroot\images\blog-3.jpg" />
+    <None Remove="wwwroot\images\blog-4.jpg" />
+    <None Remove="wwwroot\images\face-1.jpg" />
+    <None Remove="wwwroot\images\face-2.jpg" />
+    <None Remove="wwwroot\images\face-3.jpg" />
+    <None Remove="wwwroot\images\face-4.jpg" />
+    <None Remove="wwwroot\images\face-5.jpg" />
+    <None Remove="wwwroot\images\favicon.png" />
+    <None Remove="wwwroot\images\image-detail.jpg" />
+    <None Remove="wwwroot\images\photo-perfect-screenshot.png" />
+    <None Remove="wwwroot\images\QR\ThankAuthy.jpg" />
+    <None Remove="wwwroot\js\bootstrap.js" />
+    <None Remove="wwwroot\js\bootstrap.js.map" />
+    <None Remove="wwwroot\js\bootstrap.min.js" />
+    <None Remove="wwwroot\js\bootstrap.min.js.map" />
+    <None Remove="wwwroot\js\carousel.js" />
+    <None Remove="wwwroot\js\core.js" />
+    <None Remove="wwwroot\js\jquery-1.11.1.js" />
+    <None Remove="wwwroot\js\jquery-3.3.1.min.js" />
+    <None Remove="wwwroot\js\main.js" />
+    <None Remove="wwwroot\TNImages\00feb19c1133f16da822.jpg" />
+    <None Remove="wwwroot\TNImages\0157f13f5190b1cee881.jpg" />
+    <None Remove="wwwroot\TNImages\0a202f84882b6875313a.jpg" />
+    <None Remove="wwwroot\TNImages\0cc4ac070aa8eaf6b3b9.jpg" />
+    <None Remove="wwwroot\TNImages\0ec6be6618c9f897a1d8.jpg" />
+    <None Remove="wwwroot\TNImages\1f67ca076ca88cf6d5b9.jpg" />
+    <None Remove="wwwroot\TNImages\2fe51ee9be465e180757.jpg" />
+    <None Remove="wwwroot\TNImages\30bc8d0b2ba4cbfa92b5.jpg" />
+    <None Remove="wwwroot\TNImages\3aa1aae90c46ec18b557.jpg" />
+    <None Remove="wwwroot\TNImages\4225aef70e58ee06b749.jpg" />
+    <None Remove="wwwroot\TNImages\437d0aa7aa084a561319.jpg" />
+    <None Remove="wwwroot\TNImages\49c845bde312034c5a03.jpg" />
+    <None Remove="wwwroot\TNImages\4dda3387932873762a39.jpg" />
+    <None Remove="wwwroot\TNImages\4fb4b1a71708f756ae19.jpg" />
+    <None Remove="wwwroot\TNImages\5855c9746fdb8f85d6ca.jpg" />
+    <None Remove="wwwroot\TNImages\59de571bf1b411ea48a5.jpg" />
+    <None Remove="wwwroot\TNImages\5c066bdacb752b2b7264.jpg" />
+    <None Remove="wwwroot\TNImages\5febfe1a5eb5beebe7a4.jpg" />
+    <None Remove="wwwroot\TNImages\6d3bb3db1374f32aaa65.jpg" />
+    <None Remove="wwwroot\TNImages\6d5cace30b4ceb12b25d.jpg" />
+    <None Remove="wwwroot\TNImages\733b6070c6df26817fce.jpg" />
+    <None Remove="wwwroot\TNImages\788317a9b70657580e17.jpg" />
+    <None Remove="wwwroot\TNImages\7cac5a12fcbd1ce345ac.jpg" />
+    <None Remove="wwwroot\TNImages\86782695813a6164382b.jpg" />
+    <None Remove="wwwroot\TNImages\8aa3c31865b785e9dca6.jpg" />
+    <None Remove="wwwroot\TNImages\8d78cad36d7c8d22d46d.jpg" />
+    <None Remove="wwwroot\TNImages\8d8f06d0a67f46211f6e.jpg" />
+    <None Remove="wwwroot\TNImages\9291f17456dbb685efca.jpg" />
+    <None Remove="wwwroot\TNImages\964145dee371032f5a60.jpg" />
+    <None Remove="wwwroot\TNImages\98bdc74867e787b9def6.jpg" />
+    <None Remove="wwwroot\TNImages\9d48a35805f7e5a9bce6.jpg" />
+    <None Remove="wwwroot\TNImages\9eafd2a0720f9251cb1e.jpg" />
+    <None Remove="wwwroot\TNImages\9f6e250685a965f73cb8.jpg" />
+    <None Remove="wwwroot\TNImages\a3dfa120068fe6d1bf9e.jpg" />
+    <None Remove="wwwroot\TNImages\a5a65a2dfc821cdc4593.jpg" />
+    <None Remove="wwwroot\TNImages\c4d7d6b676199647cf08.jpg" />
+    <None Remove="wwwroot\TNImages\c512221a84b564eb3da4.jpg" />
+    <None Remove="wwwroot\TNImages\c683df6c78c3989dc1d2.jpg" />
+    <None Remove="wwwroot\TNImages\d09aa43b0294e2cabb85.jpg" />
+    <None Remove="wwwroot\TNImages\d654fe365e99bec7e788.jpg" />
+    <None Remove="wwwroot\TNImages\d9cf276580ca609439db.jpg" />
+    <None Remove="wwwroot\TNImages\deca350f93a073fe2ab1.jpg" />
+    <None Remove="wwwroot\TNImages\logo.png" />
+    <Content Include="Areas\StackAdmin\Views\Shared\Assets\_BottomScript.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Assets\_Dropzone.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Assets\_Style.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Assets\_TopScript.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\DataTable\_DataTableHtml.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\DataTable\_DataTableScript.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Footer.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Header.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Header\_AppHeader.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Header\_BrandHeader.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Header\_LeftHeader.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Header\_LoggedInUser.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Header\_NotificationHeader.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Navigation.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\Menu\_Sidebar.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\_AnonymousLayout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\Shared\_Meta.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-6-bk.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg-8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg_banner-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg_banner.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg_banner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\bg_menu.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\bg\hero.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\blog\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\blog\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\blog\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\brand\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\investor\8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\testimonial\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\testimonial\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\testimonial\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\images\testimonial\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\img\background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\img\sketch-underline-green.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\img\sketch-underline-purple.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\img\_background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\inner.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\js\core.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\login.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\Readme.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\scss\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\js\dashboard.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\js\layout-builder.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\bg\bg-7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\blog\blog5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\client-logos\logo5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\envato\screen1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\envato\screen2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\error\bg6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\css.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\csv.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\doc.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\html.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\javascript.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\jpg.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\mp4.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\pdf.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\xml.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\files\zip.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\exchange.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\logout.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\question.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\icons\warning.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo-1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_client_color.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_client_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_invoice_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\logos\logo_invoice_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\misc\notification_bg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\misc\quick_actions_bg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\misc\user_profile_bg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\products\product9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\100_9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\300_9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\app\media\img\users\user5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\media\img\logo\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\media\img\logo\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\skin\base\scripts.bundle.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\skin\base\style.bundle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\snippets\apps\mail\mail.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\snippets\custom\apps\mail\mail.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\snippets\custom\pages\user\login.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\flaticon\Flaticon.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\font-awesome\FontAwesome.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\line-awesome\line-awesome.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\metronic\Metronic_fda1334c35d0f5fe2afb3afebbb6774a.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\socicon\socicon.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\summernote\summernote.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\summernote\summernote.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\fonts\summernote\summernote.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\ion-rangeslider\sprite-skin-flat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\jstree\32px.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\jstree\40px.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\jstree\throbber.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\images\malihu-custom-scrollbar-plugin\mCSB_buttons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\vendors.bundle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\base\vendors.bundle.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\flot\flot.bundle.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\fullcalendar\fullcalendar.bundle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\fullcalendar\fullcalendar.bundle.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\gmaps\gmaps.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_444444_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_555555_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_777620_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_777777_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_cc0000_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\images\ui-icons_ffffff_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\jquery-ui.bundle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jquery-ui\jquery-ui.bundle.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jqvmap\jqvmap.bundle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\wwwroot\skin\vendors\custom\jqvmap\jqvmap.bundle.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\StackAdmin\Views\_ViewStart.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\About.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\PageNotFound.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\Policy.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\Privacy.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\TermCondition.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Home\_ListCard.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Profile\ConfirmProfile.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Profile\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\Assets\_BottomScript.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\Assets\_Style.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\Assets\_TopScript.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\_Favicon.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\_LayoutStacking.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\Shared\_Meta.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\StackingWallet\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\StackingWallet\Withdraw.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\StackSubscription\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\StackSubscription\Reward.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\Views\_ViewStart.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\alert\dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\all.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\line-awesome.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\main.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\vendor\animate.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\vendor\bootstrap.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\vendor\bootstrap.min.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\vendor\dots.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\css\vendor\slick.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\Flaticon.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\Flaticon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\Flaticon.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\Flaticon.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\Flaticon.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-brands-400.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-brands-400.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-brands-400.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-brands-400.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-brands-400.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-regular-400.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-regular-400.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-regular-400.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-regular-400.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-regular-400.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-solid-900.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-solid-900.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-solid-900.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-solid-900.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\la-solid-900.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\lightcase.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\lightcase.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\lightcase.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\fonts\lightcase.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-6-bk.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg-8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg_banner-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg_banner.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg_banner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\bg_menu.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\bg\hero.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\blog\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\blog\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\blog\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\brand\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\investor\8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\testimonial\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\testimonial\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\testimonial\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\images\testimonial\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\app.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\contact.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\sweetalert2.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\vendor\bootstrap.bundle.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\vendor\bootstrap.bundle.min.js.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\vendor\jquery-3.5.1.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\vendor\slick.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\js\vendor\wow.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\abstracts\_mixins.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\abstracts\_variables.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\base\_base.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\base\_reset.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\base\_typography.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\components\_buttons.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\components\_form.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\components\_keyframes.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\components\_table.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\layout\_footer.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\layout\_header.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\layout\_hero-section.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\layout\_sections.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\layout\_sidebar.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\sass\main.sass">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-brands-400.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-regular-400.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\assets\webfonts\fa-solid-900.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\css\bootstrap.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\css\bootstrap.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\css\core.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\css\main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\css\main.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\1-nature.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\10-people.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\11-people.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\13-people.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\14-people.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\16-people.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\17-people.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\18-computer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\19-computer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\2-nature.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\20-computer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\23-computer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\24-computer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\26-food.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\27-food.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\28-food.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\29-food.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\30-food.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\4-nature.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\5-nature.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\8-nature.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\9-nature.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\about-img-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\about-img-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\about-img-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\about-img-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\about-img-5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\blog-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\blog-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\blog-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\blog-4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\face-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\face-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\face-3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\face-4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\face-5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\favicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\image-detail.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\photo-perfect-screenshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_032e399e04de48e1b6c532c10bd55ac2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_1f955d88be014230854c2e35cf558c24.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_22293e94531046ef9dad0e77eeb48441.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_365bc781cf6f4b5c814f8839a81fbefb.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_429ec5edd3a14a7ba7e159323419ad45.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_4e8b2cffd4e945e6a2e1bb0bdc715f50.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_60aca20717be4fd7bf2811358bc55cef.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_83c390494ca54f7b83f86c1b632e6b06.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_952ccddf691d403ca0ba6a5f132c4f69.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_9ab881aa836b417b8f7540280962fa6c.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_ab3cb38621474d3baafe2a5bb3821b2c.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_ae24f422fadf4b5a9fa8a018d81214d5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\QrCode_d486fd8c69a34eacb7a73d057a2dcbc1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\images\QR\ThankAuthy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\android-chrome-192x192.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\android-chrome-512x512.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\apple-touch-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\browserconfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\favicon-16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\favicon-32x32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\favicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\mstile-150x150.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\android-chrome-192x192.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\android-chrome-512x512.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\apple-touch-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\favicon-16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\favicon-32x32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\favicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\New Logo\mstile-150x150.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\img\favicon\site.webmanifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\bootstrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\bootstrap.js.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\bootstrap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\bootstrap.min.js.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\carousel.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\core.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\jquery-1.11.1.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\jquery-3.3.1.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\js\webfont.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\Readme.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\TNImages\background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\TNImages\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.dataTables\buttons.colVis.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.dataTables\dataTables.buttons.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.dataTables\dataTables.colReorder.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.dataTables\jquery.dataTables.columnFilter.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.dataTables\jquery.dataTables.columnFilter.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.dataTables\jquery.dataTables.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.validate\jquery.validate.unobtrusive.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Stack\wwwroot\vendor\jquery.validate\jquery.validate.unobtrusive.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TIGE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cross\TIGE.Core.Share\TIGE.Core.Share.csproj" />
+    <ProjectReference Include="..\..\Cross\TIGE.Core\TIGE.Core.csproj" />
+    <ProjectReference Include="..\..\Cross\TIGE.Mapper\TIGE.Mapper.csproj" />
+    <ProjectReference Include="..\..\Repository\TIGE.Contract.Repository\TIGE.Contract.Repository.csproj" />
+    <ProjectReference Include="..\..\Repository\TIGE.Repository\TIGE.Repository.csproj" />
+    <ProjectReference Include="..\..\Service\TIGE.Contract.Service\TIGE.Contract.Service.csproj" />
+    <ProjectReference Include="..\..\Service\TIGE.Service\TIGE.Service.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--<PackageReference Include="Elmah.Io.AspNetCore" Version="3.5.59" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />-->
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\_Index\_Category.cshtml" />
+    <UpToDateCheckInput Remove="Views\Home\_Index\_NewImage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Areas\Portal\wwwroot\images\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Portal\wwwroot\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\images\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\QR\ThankAuthy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\core.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\StackAdmin\Data\" />
+    <Folder Include="Areas\StackAdmin\Models\" />
+    <Folder Include="Attributes\Auth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackSubscription\Add.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackSubscription\Config.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackSubscription\Edit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackSubscription\GetReward.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackSubscription\GetSubscriptionList.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackSubscription\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\Convert.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\Edit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\EditConvert.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\EditTransfer.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\EditWithdraw.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\Transfer.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\StackWallet\Withdraw.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\User\Add.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\User\Edit.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\StackAdmin\Views\User\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\Stack\Views\StackingWallet\Transfer.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\Stack\Views\StackingWallet\WithdrawUSD.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

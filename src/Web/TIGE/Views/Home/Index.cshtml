@@ -1,0 +1,359 @@
+﻿@using Elect.Core.ObjUtils
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Utils
+@using TIGE.Core.Utils
+@model TIGE.Core.Share.Models.DashboardModel
+@inject IConfigurationService ConfigurationService
+@{
+    ViewData["Title"] = "Home";
+    var config = ConfigurationService.GetConfig();
+    var tigeHistory = ConfigurationService.GetTigeHistory().ToList();
+    var month = DateTime.Now.Month + config.TIGEChartRange;
+
+    var latesPrice = 0d;
+    if (tigeHistory.Count > 1)
+    {
+        var price = tigeHistory.OrderByDescending(x => x.CreatedTime).ToArray();
+        latesPrice = price[1].Price;
+    }
+
+
+    var percent = Math.Round( (config.TokenPrice - latesPrice) / latesPrice * 100, 2);
+    var color = percent > 0 ? "badge-success" : "badge-danger";
+    var arrow = percent > 0 ? "la-arrow-up" : "la-arrow-down";
+
+}
+
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 400px;
+    }
+
+    .chart-label {
+        padding-left: 45%;
+        color: black;
+        padding-top: 15px;
+        font-size: 18pt;
+    }
+
+    @@media (max-width: 800px) {
+        .chart-label {
+            padding-left: 25%;
+        }
+    }
+
+    @@media (max-width: 450px) {
+        .chart-label {
+            padding-left: 15%;
+        }
+    }
+
+    @@media (max-width: 450px) {
+        .chart-label {
+            padding-left: 15%;
+            font-size: 14pt;
+        }
+    }
+
+    .chartjs-tooltip {
+        border-radius: 5px;
+    }
+</style>
+
+<div class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mb-none-30">
+
+                    @if (string.IsNullOrWhiteSpace(LoggedInUser.Current.WalletId))
+                    {
+                    <div class="col-xl-12 col-sm-12 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <h4 class="currency-amount">
+                                    You need update full profile to use full functions!
+                                </h4>
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                        </div><!-- d-widget-two end -->
+                    </div>
+                    }
+
+                    <div class="col-xl-4 col-sm-6 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <span class="caption">Balance</span>
+                                <h4 class="currency-amount">
+                                    $ @(LoggedInUser.Current.WalletBalance > 0 ?
+                                            LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.###")
+                                            : "0")
+                                </h4>
+                            </div>
+                            <div class="col-4">
+                                <div class="icon ml-auto">
+                                    <i class="las la-dollar-sign"></i>
+                                </div>
+                            </div>
+                        </div><!-- d-widget-two end -->
+                    </div>
+                    <div class="col-xl-4 col-sm-6 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <span class="caption">Total Slots</span>
+                                <h4 class="currency-amount">@Model.TotalSlots</h4>
+                            </div>
+                            <div class="col-4">
+                                <div class="icon ml-auto">
+                                    <i class="las la-wallet"></i>
+                                </div>
+                            </div>
+                        </div><!-- d-widget-two end -->
+                    </div>
+                    <div class="col-xl-4 col-sm-6 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <span class="caption">Total Tokens (TIGE)</span>
+                                <h4 class="currency-amount">
+                                    @Model.TotalToken
+                                    <span style="font-size: 10pt;">
+                                        @{
+                                            var totalTokenPrice = Model.TotalToken > 0 ? (Model.TotalToken * config.TokenPrice) : 0;
+                                            var rounded = Math.Round(totalTokenPrice, 4);
+                                            var text = rounded.ToString("##,###,###,###0.##");
+                                        }
+                                        ($ @text)
+                                    </span>
+                            </h4>
+                        </div>
+                        <div class="col-4">
+                            <div class="icon ml-auto">
+                                <i class="las la-cubes "></i>
+                            </div>
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+                <div class="col-xl-4 col-sm-6 mb-30">
+                    <div class="d-widget d-flex flex-wrap">
+                        <div class="col-8">
+                            <span class="caption">Total Commission</span>
+                            <h4 class="currency-amount">$ @Model.TotalCommission</h4>
+                        </div>
+                        <div class="col-4">
+                            <div class="icon ml-auto">
+                                <i class="las la-credit-card"></i>
+                            </div>
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+
+                <div class="col-xl-8 col-sm-12 mb-30 non-menu-toggle-li">
+                    <div class="d-widget d-flex flex-wrap">
+                        <div class="col-8">
+                            <span class="caption">Register Referral Link</span>
+                            <h4 class="currency-amount">@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))</h4>
+                            <input type="hidden" value="@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))" id="ref-link" />
+                        </div>
+                        <div class="col-4">
+                            <div class="icon ml-auto" style="cursor: pointer">
+                                <i class="las la-user-friends" onclick="copyTextToClipboard('#ref-link')"></i>
+                            </div>
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+
+                <div class="col-xl-8 col-sm-12 mb-30 menu-toggle-li">
+                    <div class="d-widget d-flex flex-wrap">
+                        <div class="col-8">
+                            <span class="caption">Register Referral Link</span>
+                            <h4 class="currency-amount" onclick="copyTextToClipboard('#ref-link')">@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))</h4>
+                            <input type="hidden" value="@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))" id="ref-link" />
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+            </div>
+            <div class="row mt-50">
+                <div class="col-lg-12">
+                    <div class="" style="background-color: aliceblue;">
+                        <div class="row align-content-center chart-label">
+                            <strong> TIGE $@(config.TokenPrice.ToString("#,###,###0.#####"))   </strong>
+
+                            <span class="badge @color" style="margin-left: 15px; padding-top: 12px;">
+                                <i class="las @arrow"></i>
+                                @percent %
+                            </span>
+                        </div>
+
+
+                        @*<canvas id="myChart" width="400" height="300"></canvas>*@
+                        @*<div id="chartdiv"></div>*@
+
+                        <canvas id="myChart" ></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" type="text/javascript"></script>
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>*@
+
+    @*<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+
+    <script>
+
+        var dataChart = JSON.parse('@Html.Raw(tigeHistory.ToJsonString())');
+        var labeldata = [];
+        var chrtdata = [];
+
+        for (var i = 0; i < dataChart.length; i++)
+        {
+            var date = new Date(dataChart[i].createdTime);
+            var textDate = moment(date).format('DD-MMM');
+
+            labeldata.push(textDate);
+            chrtdata.push( dataChart[i].price);
+        }
+
+        var labelChart = "Price (USD)";
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labeldata,
+                datasets: [{
+                    label: labelChart,
+                    data: chrtdata,
+                    backgroundColor: [
+                        'rgba(63, 106, 227, 0.2)'
+                       
+                    ],
+                    borderColor: [
+                        'rgba(63, 106, 227, 1)'
+                      
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return '$ ' + value.toFixed(4);
+                            }
+                        }
+                    }
+                },
+            
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    tooltip: {
+                        // Disable the on-canvas tooltip
+                        enabled: false,
+
+                        external: function (context) {
+                            // Tooltip Element
+                            var tooltipEl = document.getElementById('chartjs-tooltip');
+
+                            // Create element on first render
+                            if (!tooltipEl) {
+                                tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chartjs-tooltip';
+                                tooltipEl.innerHTML = '<table></table>';
+                                document.body.appendChild(tooltipEl);
+                            }
+
+                            // Hide if no tooltip
+                            var tooltipModel = context.tooltip;
+                            if (tooltipModel.opacity === 0) {
+                                tooltipEl.style.opacity = 0;
+                                return;
+                            }
+
+                            // Set caret Position
+                            tooltipEl.classList.remove('above', 'below', 'no-transform');
+                            if (tooltipModel.yAlign) {
+                                tooltipEl.classList.add(tooltipModel.yAlign);
+                            } else {
+                                tooltipEl.classList.add('no-transform');
+                            }
+
+                            function getBody(bodyItem) {
+                                return bodyItem.lines;
+                            }
+
+                            // Set Text
+                            if (tooltipModel.body) {
+                                var titleLines = tooltipModel.title || [];
+                                var bodyLines = tooltipModel.body.map(getBody);
+
+                                var innerHtml = '<thead>';
+
+                                titleLines.forEach(function (title) {
+                                    innerHtml += '<tr><th>' + title + " " + moment().year() + ' </th></tr>';
+                                });
+                                innerHtml += '</thead><tbody>';
+
+                                bodyLines.forEach(function (body, i) {
+
+                                    var value = body[0].replace(labelChart, "").replace(": ", "");
+
+                                    var colors = tooltipModel.labelColors[i];
+                                    var style = 'background:' + " black";
+                                    style += '; border-color:' + colors.borderColor;
+                                    style += '; border-width: 2px';
+                                    var span = '<span style="' + style + '"></span>';
+                                    innerHtml += '<tr><td>' + span + labelChart + ": " + parseFloat(value).toFixed(4) + '</td></tr>';
+                                   
+                                });
+                                innerHtml += '</tbody>';
+
+                                var tableRoot = tooltipEl.querySelector('table');
+                                tableRoot.innerHTML = innerHtml;
+                            }
+
+                            var position = context.chart.canvas.getBoundingClientRect();
+                            var bodyFont = Chart.helpers.toFont(tooltipModel.options.bodyFont);
+
+                            // Display, position, and set styles for font
+                            tooltipEl.style.opacity = 1;
+                            tooltipEl.style.position = 'absolute';
+                            tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                            tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                            tooltipEl.style.font = bodyFont.string;
+                            tooltipEl.style.padding = tooltipModel.padding + 'px ' + tooltipModel.padding + 'px';
+                            tooltipEl.style.pointerEvents = 'none';
+                            tooltipEl.style.backgroundColor = 'black';
+                            tooltipEl.style.border = "2px solid black";
+                        },
+                        callbacks: {
+                            labelColor: function(tooltipItem, chart) {
+                                return {
+                                    backgroundColor: 'rgb(255, 0, 0)'
+                                }
+                            }
+                        },
+                        backgroundColor: '#227799'
+                    }
+                }
+            }
+        });
+
+
+    </script>
+}

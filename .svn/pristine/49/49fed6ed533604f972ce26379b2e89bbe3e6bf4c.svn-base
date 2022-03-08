@@ -1,0 +1,184 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Repository.Models.Stacking
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Models.Token
+@using TIGE.Core.Share.Utils
+@using Enums = TIGE.Core.Share.Constants.Enums
+@inject IStackConfigService ConfigurationService
+@{
+    var config = ConfigurationService.GetConfig();
+    var tokens  = (List<StackWithdrawUSDModel>)ViewBag.WithDraw;
+    var wallet = ViewBag.wallet as StackingWalletEntity;
+}
+
+@model CreateWithdrawStackRequestModel
+
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header">
+                    <h2 class="section-title text-center"><span class="font-weight-normal">Withdraw </span> <b class="base--color">Request</b></h2>
+                    <div class="text-center mt-50 mb-50">                   
+                        <span class="col-sm-5" onclick="">
+                            <a href="/stake/stakingwallets/withdraw"><label class="text-warning">Withdraw TIGE</label></a>
+                        </span>
+                         <span class="col-sm-5">
+                            <a href="/stake/stakingwallets/withdrawusd"><label class="text-warning">Withdraw USD</label></a>
+                        </span>
+                    </div>
+                    <p>1. Only withdrawal with the Wallet address Network BEP20 (BSC) and confirmed by your mail.</p>
+                    <p>2. Recheck your wallet address withdrawal before confirmed by your mail.</p>
+                    <p>3. Minimum Withdrawal transaction is @config.MinWithDrawUSD TIGE.</p>
+                    <p>4. Network withdrawal fee and time proceed will depend on Network gas fee when the transactions confirm.</p>
+                    <p>5. Until the approval from the system is made, an equivalent amount of your assets will be temporarily unavailable for other transactions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-controller="StackingWallet" asp-action="SubmitWithdrawUSD" method="post"  >
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label>Staking Wallet (TIGE)</label>
+                                <div>
+                                    <h2>@(wallet.Balance.ToString("##,###,###,###0.##"))</h2>
+                                </div>
+                                @*<input type="text" value="@LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>   
+                            <div class="col-lg-12 mb-30">
+                                <label>Price Tige (USD)</label>
+                                <div>
+                                    <h2 id="price-value"></h2>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12 mb-30">
+                                <label>Convert Token</label>
+                                <input type="text" asp-for="Amount" placeholder="0" class="form-control" onchange="calculating(this)">
+                                <span asp-validation-for="Amount"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Wallet Address</label>
+                                <input type="text" asp-for="WalletAddress" placeholder="" class="form-control">
+                                <span asp-validation-for="WalletAddress"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Fee (USD)</label>
+                                <div>
+                                    <h2 id="fee-value"></h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>You will get (USD)</label>
+                                <div>
+                                    <h2 id="total-value"></h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Confirm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive p-0" style="max-width:inherit;max-height:500px;">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Price Tige (USD)</th>
+                            <th>Amount (TIGE)</th>
+                            <th>Convert Fee (USD)</th>
+                            <th>Total Amount (USD)</th>
+                            <th>Withdraw Fee (USD)</th>
+                            <th>Time</th>
+                            <th>Tx hash</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @{
+
+                            foreach (var Token in tokens.OrderByDescending(x=>x.CreatedTime))
+                            {
+                                <tr>
+                                    <td data-label="ID">@Token.Id</td>
+                                    <td data-label="Unit Price (USD)">
+                                        <span class="text-success">@Token.TigePrice.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Token Quantity (TIGE)">
+                                        <span class="text-success">@Token.AmountTige.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Convert Fee (USD)">
+                                        <span class="text-success">@Token.ConvertFeeUSD.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Total Amount (USD)">
+                                        <span class="text-success">@Token.AmountUSD.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Withdraw Fee (USD)">
+                                        <span class="text-success">@Token.FeeUSD.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Time">@Token.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                    <td data-label="Tx hash">@Token.TxHash</td>
+                                    <td data-label="Status">@Token.Status.AsString(EnumFormat.DisplayName)</td>
+                                    @if (Token.Status == Enums.StackWithdrawUSD.New)
+                                    {
+                                        <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="deleteItem('@Token.Id')" ><i class="fa fa-trash"></i></span></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function() {
+        sendData(0);
+    });
+
+    function calculating(sender) {
+        var quantity = $(sender).val();
+        sendData(quantity);
+    }
+
+    function sendData(quantity) {
+        var url = "/api/tokens/cal/" + quantity;
+        $.get(url, function( data ) {
+
+            $("#price-value").text(data.unitPrice);
+            $("#total-value").text(data.totalAmount);
+            $("#fee-value").text(data.feeAmount);
+        });
+    }
+
+    function deleteItem(id) {
+
+        var url = '@Url.Action("DeleteWithdrawUSD","StackWallet", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+</script>

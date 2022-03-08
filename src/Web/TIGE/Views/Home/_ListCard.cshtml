@@ -1,0 +1,21 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+@foreach (var product in Model)
+{
+    <div class="card" data-groups="[&quot;@product.CategoryId&quot;]">
+        <a href="@Url.Action("Detail","Profile", new {id = product.Id})">
+            <figure class="pp-effect">
+                <img class="img-fluid" src="@Url.Content(product.ImageUrl)" alt="@product.CategoryId" />
+                <figcaption>
+                    <div class="h4">@product.Name ( @product.Code )</div>
+                    <p>@product.CategoryName</p>
+                </figcaption>
+            </figure>
+        </a>
+    </div>
+}
+

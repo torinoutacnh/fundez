@@ -1,0 +1,314 @@
+﻿@using Elect.Core.ObjUtils
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Utils
+@using TIGE.Core.Utils
+@model TIGE.Core.Share.Models.DashboardModel
+@inject IConfigurationService ConfigurationService
+@{
+    ViewData["Title"] = "Home";
+    var config = ConfigurationService.GetConfig();
+    var tigeHistory = ConfigurationService.GetTigeHistory().ToList();
+    var month = DateTime.Now.Month + config.TIGEChartRange;
+
+    var latesPrice = 0d;
+    if (tigeHistory.Count > 1)
+    {
+        var price = tigeHistory.OrderByDescending(x => x.CreatedTime).ToArray();
+        latesPrice = price[1].Price;
+    }
+
+
+    var percent = Math.Round( (config.TokenPrice - latesPrice) / latesPrice * 100, 2);
+    var color = percent > 0 ? "badge-success" : "badge-danger";
+    var arrow = percent > 0 ? "la-arrow-up" : "la-arrow-down";
+
+}
+
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 400px;
+    }
+
+    .chart-label {
+        padding-left: 45%;
+        color: black;
+        padding-top: 15px;
+        font-size: 18pt;
+    }
+
+    @@media (max-width: 800px) {
+        .chart-label {
+            padding-left: 25%;
+        }
+    }
+
+    @@media (max-width: 450px) {
+        .chart-label {
+            padding-left: 15%;
+        }
+    }
+
+    @@media (max-width: 450px) {
+        .chart-label {
+            padding-left: 15%;
+            font-size: 14pt;
+        }
+    }
+</style>
+
+<div class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row mb-none-30">
+
+                    @if (string.IsNullOrWhiteSpace(LoggedInUser.Current.WalletId))
+                    {
+                    <div class="col-xl-12 col-sm-12 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <h4 class="currency-amount">
+                                    You need update full profile to use full functions!
+                                </h4>
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                        </div><!-- d-widget-two end -->
+                    </div>
+                    }
+
+                    <div class="col-xl-4 col-sm-6 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <span class="caption">Balance</span>
+                                <h4 class="currency-amount">
+                                    $ @(LoggedInUser.Current.WalletBalance > 0 ?
+                                            LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.###")
+                                            : "0")
+                                </h4>
+                            </div>
+                            <div class="col-4">
+                                <div class="icon ml-auto">
+                                    <i class="las la-dollar-sign"></i>
+                                </div>
+                            </div>
+                        </div><!-- d-widget-two end -->
+                    </div>
+                    <div class="col-xl-4 col-sm-6 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <span class="caption">Total Slots</span>
+                                <h4 class="currency-amount">@Model.TotalSlots</h4>
+                            </div>
+                            <div class="col-4">
+                                <div class="icon ml-auto">
+                                    <i class="las la-wallet"></i>
+                                </div>
+                            </div>
+                        </div><!-- d-widget-two end -->
+                    </div>
+                    <div class="col-xl-4 col-sm-6 mb-30">
+                        <div class="d-widget d-flex flex-wrap">
+                            <div class="col-8">
+                                <span class="caption">Total Tokens (TIGE)</span>
+                                <h4 class="currency-amount">
+                                    @Model.TotalToken
+                                    <span style="font-size: 10pt;">
+                                        @{
+                                            var totalTokenPrice = Model.TotalToken > 0 ? (Model.TotalToken * config.TokenPrice) : 0;
+                                            var rounded = Math.Round(totalTokenPrice, 4);
+                                            var text = rounded.ToString("##,###,###,###0.###");
+                                        }
+                                        ($ @text)
+                                    </span>
+                            </h4>
+                        </div>
+                        <div class="col-4">
+                            <div class="icon ml-auto">
+                                <i class="las la-cubes "></i>
+                            </div>
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+                <div class="col-xl-4 col-sm-6 mb-30">
+                    <div class="d-widget d-flex flex-wrap">
+                        <div class="col-8">
+                            <span class="caption">Total Commission</span>
+                            <h4 class="currency-amount">$ @Model.TotalCommission</h4>
+                        </div>
+                        <div class="col-4">
+                            <div class="icon ml-auto">
+                                <i class="las la-credit-card"></i>
+                            </div>
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+
+                <div class="col-xl-8 col-sm-12 mb-30 non-menu-toggle-li">
+                    <div class="d-widget d-flex flex-wrap">
+                        <div class="col-8">
+                            <span class="caption">Register Referral Link</span>
+                            <h4 class="currency-amount">@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))</h4>
+                            <input type="hidden" value="@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))" id="ref-link" />
+                        </div>
+                        <div class="col-4">
+                            <div class="icon ml-auto" style="cursor: pointer">
+                                <i class="las la-user-friends" onclick="copyTextToClipboard('#ref-link')"></i>
+                            </div>
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+
+                <div class="col-xl-8 col-sm-12 mb-30 menu-toggle-li">
+                    <div class="d-widget d-flex flex-wrap">
+                        <div class="col-8">
+                            <span class="caption">Register Referral Link</span>
+                            <h4 class="currency-amount" onclick="copyTextToClipboard('#ref-link')">@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))</h4>
+                            <input type="hidden" value="@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}", LoggedInUser.Current.Code))" id="ref-link" />
+                        </div>
+                    </div><!-- d-widget-two end -->
+                </div>
+            </div>
+            <div class="row mt-50">
+                <div class="col-lg-12">
+                    <div class="" style="background-color: aliceblue">
+                        <div class="row align-content-center chart-label">
+                            <strong>  Token TIGE $@(config.TokenPrice.ToString("#,###,###0.#####"))   </strong>
+
+                            <span class="badge @color" style="margin-left: 15px; padding-top: 12px;">
+                                <i class="las @arrow"></i>
+                                @percent %
+                            </span>
+                        </div>
+
+
+                        @*<canvas id="myChart" width="400" height="300"></canvas>*@
+                        <div id="chartdiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" type="text/javascript"></script>
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>*@
+
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script>
+
+        var dataChart = JSON.parse('@Html.Raw(tigeHistory.ToJsonString())');
+        var lengthChart = @month;
+
+
+        $(dataChart).each(function(idx, item) {
+            var date = new Date(item.createdTime);
+            item.Time = date;
+        });
+
+        am4core.ready(function () {
+
+            am4core.useTheme(am4themes_animated);
+            var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+            chart.data = dataChart;
+            chart.dateFormatter.utc = true;
+
+
+            var topContainer = chart.chartContainer.createChild(am4core.Container);
+            topContainer.layout = "absolute";
+            topContainer.toBack();
+            topContainer.paddingBottom = 15;
+            topContainer.width = am4core.percent(100);
+
+
+
+            var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+            dateAxis.gridIntervals.setAll([
+                { timeUnit: "day", count: 7 }
+            ]);
+
+            dateAxis.renderer.grid.template.location = 0;
+            dateAxis.renderer.minGridDistance = 50;
+            dateAxis.renderer.labels.template.location = 0.0001;
+
+            let label = dateAxis.renderer.labels.template;
+            label.wrap = true;
+            label.maxWidth = 50;
+            label.tooltipText = "{date}";
+
+            //label.wrap = true;
+            //label.truncate = true;
+            //label.maxWidth = 50;
+            //dateAxis.max = (new Date(2021, lengthChart, 1)).getTime();
+
+            // Create value axis
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+            valueAxis.numberFormatter = new am4core.NumberFormatter();
+            valueAxis.numberFormatter.numberFormat = '$ #,###0.####';
+
+            //valueAxis.title.text = "Price of TIGE (USD)";
+            //valueAxis.title.fontWeight = "bold";
+
+            // Create series
+            var series = chart.series.push(new am4charts.LineSeries());
+            series.dataFields.valueY = "price";
+            series.dataFields.dateX = "Time";
+            series.strokeWidth = 3;
+            series.tooltipText = "{valueY.value}";
+            series.fillOpacity = 0.1;
+
+            // Add cursor
+             chart.cursor = new am4charts.XYCursor();
+            chart.cursor.xAxis = dateAxis;
+            //chart.scrollbarX = new am4core.Scrollbar();
+
+            series.tooltip.getFillFromObject = false;
+            series.tooltip.adapter.add("x",
+                (x, target) => {
+                    if (series.tooltip.tooltipDataItem.valueY < 0) {
+                        series.tooltip.background.fill = chart.colors.getIndex(4);
+                    } else {
+                        series.tooltip.background.fill = chart.colors.getIndex(0);
+                    }
+                    return x;
+                });
+
+
+
+            chart.responsive.enabled = true;
+
+            chart.responsive.rules.push({
+                relevant: function (target) {
+                    if (target.pixelWidth <= 600) {
+
+                        return true;
+                    }
+                    return false;
+                },
+                state: function (target, stateId) {
+                    if (target instanceof am4charts.Chart) {
+                        var state = target.states.create(stateId);
+                        state.properties.paddingTop = 5;
+                        state.properties.paddingRight = 15;
+                        state.properties.paddingBottom = 5;
+                        state.properties.paddingLeft = 0;
+                        return state;
+                    }
+                    return null;
+                    return;
+                }
+            });
+        });
+
+
+    </script>
+}

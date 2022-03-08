@@ -1,0 +1,171 @@
+﻿@using System.Net.Http
+@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Utils
+@using TIGE.Core.Utils
+@model TIGE.Core.Share.Models.CreateDepositRequestModel
+@inject IConfigurationService ConfigurationService
+@{
+
+    var wallet = ViewBag.wallet as WalletModel;
+    var config = ConfigurationService.GetConfig();
+
+    var qrCode = SystemHelper.Setting.GenerateQRCodeEndpoint.Replace("{data}", config?.TotalDepositWallet);
+
+    var link = String.Empty;
+    using (var client = new HttpClient())
+    {
+        var bytes = await client.GetByteArrayAsync(qrCode);
+        link = "data:image/png;base64," + Convert.ToBase64String(bytes);
+    }
+}
+
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Deposit </span> <b class="base--color">Request</b></h2>
+                </div>
+                <div class="section-header">
+                    <ol>
+                        <li><b class="base--color">Please double check the wallet address network and read the terms carefully before creating and confirming the request. To support deposits we use only the following 5 Deposit Cryptos:</b></li>
+                        <li>  • ETH on ERC20 Network     </li>
+                        <li>  • BNB on BEP20 (BSC) Network     </li>
+                        <li>  • USDT on ERC20 Network     </li>
+                        <li>  • USDT on BEP20 (BSC) Network     </li>
+                        <li>  • TIGE on BEP20 (BSC) Network (with Anti-Dumping Fee)     </li>
+
+                        <li>
+                            1. Deposit only when you have updated your profile with your wallet address and confirmed the update via your mail. Check your profile again if your address has been updated successfully before depositing.
+                        </li>
+                        <li>
+                            2. Only use those 5 Deposits Crypto to this deposit address. Sending a coin or token other than those 5 Deposits Crypto above to this address may result in the loss of your deposit.
+                        </li>
+                        <li>
+                            3. After you have deposited, please send us the Tx hash immediately and pay attention to the confirmation email we send you.
+                        </li>
+                        <li>
+                            4. Balance will be deposited after 6 network confirmations and system approval.
+                        </li>
+                        <li>5. Until the approval from the system is made, an equivalent amount of your assets will be temporarily unavailable for withdrawals.</li>
+                        <li>6. Important Note: when Deposit with TIGE on BEP20 Network (BSC) Final Amount will be deducted Anti-Dumping Fee: additional fee when converting from TIGE to USD in large amount. (see our policy for more details on Anti-Dumping Fee)</li>
+                    </ol> 
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="profit-calculator" asp-action="SubmitDeposit">
+                        <div class="row mb-none-30">
+                            @*<div class="col-lg-6 mb-30">
+                                <label>Choose Plan</label>
+                                <select class="base--bg">
+                                    <option>Basic Package</option>
+                                    <option>Standard Package</option>
+                                    <option>Silver Package</option>
+                                    <option>Premium Package</option>
+                                    <option>Platinum Package</option>
+                                </select>
+                            </div>*@
+                            @*<div class="col-lg-6 mb-30">
+                                <label>Invest Amount</label>
+                                <input type="text" name="invest_amount" id="invest_amount" placeholder="0.00" class="form-control base--bg">
+                            </div>*@
+                            <div class="row justify-content-center">
+                                <div class="col-lg-4">
+                                    <div class="section-header text-center">
+                                        @if (!string.IsNullOrWhiteSpace(link))
+                                        {
+                                            <img src="@link" alt="image" style="height: 250px;">
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 mb-30">
+                                    <div class="col-12" style="padding-right: 0px; margin-right: -15px; word-break: break-all">
+                                        <label>Address (this Wallet is used for deposit only)</label>
+                                        @*<input type="text" value="@config?.TotalDepositWallet" onclick="copyTextToClipboard(this)" placeholder="0.00" class="form-control base--bg" readonly="readonly">*@
+                                        <label class="">@config?.TotalDepositWallet</label>
+                                        <div class="input-group mb-3">
+                                            <input type="hidden" class="form-control base--bg" value="@config?.TotalDepositWallet" id="main-address" readonly="readonly" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="cmn-btn" type="button" onclick="copyTextToClipboard('#main-address')">Copy</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-12 mb-30">
+                                        <label>Balance (USD)</label>
+                                        <div class="row col-12">
+                                            <h2 >@LoggedInUser.Current.WalletBalance.ToString("##,###,###0.##")</h2>
+                                        </div>
+
+                                        @*<input type="text" value="@LoggedInUser.Current.WalletBalance.ToString("##,###,###.##")" class="form-control base--bg" readonly="readonly">*@
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-12 mb-30">
+                                <label>Tx hash</label>
+                                <input type="text" asp-for="TxHash" placeholder="Transaction Hash" class="form-control">
+                                <span asp-validation-for="TxHash"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Send Request</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive--md p-0">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                @*<th>Amount (ETH)</th>*@
+                                <th>Amount (USD)</th>
+                                <th>Time</th>
+                                <th>Tx hash</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (wallet != null)
+                            {
+                                foreach (var history in wallet.Deposits.OrderByDescending(x => x.Time))
+                                {
+                                    <tr>
+                                        <td data-label="ID">@history.Id</td>
+                                        @*<td data-label="Amount (ETH)">
+                                            <span class="">@history.AmountETH.ToString("###,###,###,###0.######")</span>
+                                        </td>*@
+                                        <td data-label="Amount (USD)">
+                                            <span class="">@history.AmountUSD.ToString("###,###,###,###0.##")</span>
+                                        </td>
+                                        <td data-label="Time">@history.Time.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        <td data-label="Tx hash" class="tx-hash">@history.TxHash</td>
+                                        <td data-label="Status">@history.Status.AsString(EnumFormat.DisplayName)</td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+
+
+</script>

@@ -1,0 +1,99 @@
+﻿{
+  "AllowedHosts": "*",
+  "Kestrel": {
+    "EndPoints": {
+      "Http": {
+        "Url": "http://*:9001"
+      }
+    }
+  },
+  "IIS": {
+    "IsUseIIS": false,
+    "IsUseIISIntegration": false
+  },
+  "SystemSetting": {
+    "ApplicationName": "FundEZ.co",
+    "NotifyEmail": "admin@fundez.co",
+    "Domain": "fundez.co",
+    "IsEnforceHttps": false,
+    "EncryptKey": "299538B3-A23A-48F8-9D38-2A39ACE01F35",
+    "AuthorizeCodeStorageSeconds": 6000,
+    "ReferFormatLink": "https://fundez.co/accounts/signup?code={{code}}",
+    "ExchangeRateEndpoint": "https://api.coinbase.com/v2/exchange-rates",
+    "GenerateQRCodeEndpoint": "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data={data}",
+    "AuthyAppId": "413673",
+    "AuthyAppSecretKey": "8Lnk4Yq8Ic1xMWJUbTRvxwoelB585rEp",
+    "AuthyAppName": "fundez.co",
+    "AuthyAppWebSite": "fundez.co",
+    "AuthyAppApiKey": "ThXaEhuHMzhoG1nbitIRpv12beAOArr1",
+    "AuthyAppAccessKey": "YZNLKuvA2DxHezk9ETTLk4oEJVCkcxuPwRpseGcH7vo",
+    "AuthyApiSigningKey": "0VwCPoKmvQs7qhNlsgbI1U4JxBEJSk2p"
+  },
+
+  "GmailEmailProvider": {
+    "DisplayName": "Testing",
+    "UserName": "noreply@fundez.co", //noreply@fundez.co
+    "Password": "qwrskcuswumdhqas" //qwrskcuswumdhqas
+  },
+
+  "AmazonEmailProvider": {
+    "DisplayName": "fundez",
+    "Email": "noreply@fundez.co", //noreply@fundez.co
+    "UserName": "AKIAZ4BVP4N46YVJEJBY", //AKIAZ4BVP4N46YVJEJBY
+    "Password": "BHUp41hF2gCuYsa8aQj1keXV+oEslfcakur1nfzZjZIp" //BHUp41hF2gCuYsa8aQj1keXV+oEslfcakur1nfzZjZIp
+  },
+
+
+  "ElectSwagger": {
+    "IsEnable": {
+      "Development": true,
+      "Staging": true,
+      "Production": true
+    },
+    "SwaggerRoutePrefix": "developers/api-docs",
+    "SwaggerName": "all.json",
+    "Url": "/developers",
+    "JsonViewerUrl": "/developers/json-viewer",
+    "Title": "API Document",
+    "Version": "latest",
+    "AccessKey": "",
+    "UnAuthorizeMessage": "You don't have permission to view API Document, please contact your administrator.",
+    "IsFullSchemaForType": false,
+    "IsDescribeAllEnumsAsString": true,
+    "IsDescribeAllParametersInCamelCase": true,
+    "AuthorName": "",
+    "AuthorEmail": "",
+    "AuthorWebsite": ""
+  },
+
+  "ElectHangfire": {
+    "IsEnable": true,
+    "IsDisableJobDashboard": false,
+    "StatsPollingInterval": 3000,
+    "BackToUrl": "/",
+    "Url": "/developers/job",
+    "AccessKey": "",
+    "UnAuthorizeMessage": "You don't have permission to view Log Dashboard, please contact your administrator.",
+    "Provider": "SqlServer",
+    "DbConnectionString": {
+      "Development": "Data Source=45.32.112.116, 1433;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True"
+      //"Development": "Data Source=localhost\\SQLExpress;Initial Catalog=fundez.co;Trusted_Connection=True;MultipleActiveResultSets=True"
+    }
+  },
+  "ElectHealthCheck": {
+    "IsEnable": false,
+    "Endpoint": "/health",
+    "DbConnectionString": {
+      "Development": "Data Source=45.32.112.116, 1433;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True"
+      //"Development": "Data Source=45.32.112.116\\SQLEXPRESS, 1433;Initial Catalog=fundez2.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True"
+    }
+  },
+  "ElectOneSignalOptions": {
+    "AuthKey": "MWYwMzMwNWItYzNmYy00YWRkLWIwMTgtYzIyNzA4YTA3Mzdm",
+    "Apps": [
+      {
+        "AppId": "35268160-326a-43c0-8203-49c8b99a8c6c"
+      }
+    ]
+  }
+}

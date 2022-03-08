@@ -1,0 +1,147 @@
+﻿@using Elect.Core.ObjUtils
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Utils
+@using TIGE.Core.Utils
+@model TIGE.Core.Share.Models.DashboardModel
+@inject IConfigurationService ConfigurationService
+@inject IProtectionFeeService ProtectionFeeService
+@{
+    ViewData["Title"] = "Policy Marketing và Protection Fee";
+    var config = ConfigurationService.GetConfig();
+
+    var all = ProtectionFeeService.GetAll();
+}
+
+
+<section class="pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog-details-wrapper">
+                    <div class="blog-details__thumb">
+                        @*<img src="assets/images/blog/1.jpg" alt="image">*@
+                        @*<div class="post__date">
+                                <span class="date">20</span>
+                                <span class="month">feb</span>
+                            </div>*@
+                    </div><!-- blog-details__thumb end -->
+                    <div class="blog-details__content">
+                        <h4 class="blog-details__title" style="color: gold">Marketing Plan</h4>
+                        <p>Commission policy for users when participating in the program introduces TIGE Token to the community.                        </p>
+                        <p>Conditions: users must have at least 1 slot to participate. </p>
+                        <p>You need to qualify Personal Slot Condition according to the policy to receive the next level.</p>
+                        <br />
+                        <table class="table table-bordered" style="color: white">
+                            <thead>
+                                <tr>
+                                    <th>F</th>
+                                    <th>Commission</th>
+                                    <th>Personal Slot Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>F1</td>
+                                    <td>@config.Level1%</td>
+                                    <td>@config.ConditionLevel1</td>
+                                </tr>
+                                <tr>
+                                    <td>F2</td>
+                                    <td>@config.Level2%</td>
+                                    <td>@config.ConditionLevel2</td>
+                                </tr>
+                                <tr>
+                                    <td>F3</td>
+                                    <td>@config.Level3%</td>
+                                    <td>@config.ConditionLevel3</td>
+                                </tr>
+                                <tr>
+                                    <td>F4</td>
+                                    <td>@config.Level4%</td>
+                                    <td>@config.ConditionLevel4</td>
+                                </tr>
+                                <tr>
+                                    <td>F5</td>
+                                    <td>@config.Level5%</td>
+                                    <td>@config.ConditionLevel5</td>
+                                </tr>
+                                <tr>
+                                    <td>F6</td>
+                                    <td>@config.Level6%</td>
+                                    <td>@config.ConditionLevel6</td>
+                                </tr>
+                                <tr>
+                                    <td>F7</td>
+                                    <td>@config.Level7%</td>
+                                    <td>@config.ConditionLevel7</td>
+                                </tr>
+                                <tr>
+                                    <td>F8</td>
+                                    <td>@config.Level8%</td>
+                                    <td>@config.ConditionLevel8</td>
+                                </tr>
+                                <tr>
+                                    <td>F9</td>
+                                    <td>@config.Level9%</td>
+                                    <td>@config.ConditionLevel9</td>
+                                </tr>
+                                <tr>
+                                    <td>F10</td>
+                                    <td>@config.Level10%</td>
+                                    <td>@config.ConditionLevel10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="blog-details__thumb">
+                        @*<img src="assets/images/blog/1.jpg" alt="image">*@
+                        @*<div class="post__date">
+                                <span class="date">20</span>
+                                <span class="month">feb</span>
+                            </div>*@
+                    </div><!-- blog-details__thumb end -->
+                    <div class="blog-details__content">
+                        <h4 class="blog-details__title" style="color: gold">
+                            Protection Fee
+                        </h4>
+                        <p>
+                            We have a policy to protect long-term investors, to limit the risk of bear market and price manipulation, so we will have an extra fee for transferring from TIGE to USD with large amounts.
+                        </p>
+                        <p>
+                            This fee will be used to protect the TIGE Token price.
+                        </p>
+                        <br />
+                        <table class="table table-bordered" style="color: white">
+                            <thead>
+                                <tr>
+                                    <th>Amount Daily Transfer (USD)</th>
+                                    <th>
+                                        Protection Fee
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var fee in all)
+                                {
+                                <tr>
+                                    <td>
+                                        $@fee.From.ToString("###,###,###0.##") - $@fee.To.ToString("###,###,###0.##")
+                                    </td>
+                                    <td>@fee.Fee.ToString("##0.##")%</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+
+}

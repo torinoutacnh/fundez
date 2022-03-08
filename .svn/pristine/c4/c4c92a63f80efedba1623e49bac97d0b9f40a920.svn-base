@@ -1,0 +1,51 @@
+﻿@model Elect.Web.DataTable.Models.DataTableModel
+
+@{
+    // Handle Default Values for Options
+    Model.IsShowFooter = Model.IsShowFooter ?? false;
+    Model.IsHideHeader = Model.IsHideHeader ?? false;
+    Model.IsUseColumnFilter = Model.IsUseColumnFilter ?? true;
+}
+
+<div id="@(Model.Id)_wrapper">
+    <table id="@Model.Id" class="dataTables @(Model.TableClass ?? string.Empty)">
+        <thead class="dataTables_head">
+        @if (Model.IsUseColumnFilter == true)
+        {
+            <tr>
+                @for (int i = 0; i < Model.Columns.Count; i++)
+                {
+                    <th></th>
+                }
+            </tr>
+        }
+        @if (Model.IsHideHeader != true)
+        {
+            <tr>
+                @foreach (var column in Model.Columns)
+                {
+                    <th class="@column.CssClassHeader" @Html.Raw(string.IsNullOrWhiteSpace(column.AdditionalAttributeHeader) ? string.Empty : column.AdditionalAttributeHeader)>@column.DisplayName</th>
+                }
+            </tr>
+        }
+        </thead>
+        @if (Model.IsShowFooter == true)
+        {
+            <tfoot class="dataTables_foot">
+            <tr>
+                @for (int i = 0; i < Model.Columns.Count; i++)
+                {
+                    <th></th>
+                }
+            </tr>
+            </tfoot>
+        }
+        <tbody class="dataTables_body">
+        <tr>
+            <td colspan="@Model.Columns.Count" class="dataTables_empty">
+                Loading...
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

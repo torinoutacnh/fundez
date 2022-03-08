@@ -1,0 +1,78 @@
+﻿@using TIGE.Core.Utils
+@{
+    string title = ViewData[ViewDataKey.Title]?.ToString();
+
+    if (string.IsNullOrWhiteSpace(title))
+    {
+        title = SystemHelper.Setting.ApplicationName;
+    }
+    else
+    {
+        title += $" | {SystemHelper.Setting.ApplicationName}";
+    }
+
+    string description = ViewData[ViewDataKey.Description]?.ToString();
+    string imageUrl = ViewData[ViewDataKey.ImageUrl]?.ToString();
+    string facebookType = ViewData[ViewDataKey.FacebookType]?.ToString() ?? "website";
+
+    string facebookAdminId = "<facebook id>";
+    string facebookPages = "<facebook id>";
+    string publisherUrl = "facebook.com/<facebook id>/";
+
+    string pageUrl = Url.ActionContext.HttpContext.Request.GetDisplayUrl();
+ 
+}
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="referrer" content="origin" />
+<meta name="robots" content="noodp" />
+<meta name="application-name" content="@SystemHelper.Setting.ApplicationName" />
+<meta name="apple-mobile-web-app-title" content="@SystemHelper.Setting.ApplicationName" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<meta name="author" content="Linh Nguyen" />
+<link rel="author" href="http://linhnguyen.net" />
+<meta name="web_author" content="http://linhnguyen.net" />
+<meta name="designer" content="http://linhnguyen.net" />
+
+<!-- Title -->
+<title>@title</title>
+<meta name="title" content="@title" />
+<meta property="og:title" content="@title" />
+<meta property="og:site_name" content="@SystemHelper.Setting.ApplicationName" />
+
+<!-- Description -->
+<meta name="description" content="@description" />
+<meta property="og:description" content="@description" />
+
+<link rel="publisher" href="@publisherUrl" />
+<link rel="canonical" href="@pageUrl" />
+<meta property="og:url" content="@pageUrl" />
+
+<meta property="fb:type" content="@facebookType" />
+
+@if (!string.IsNullOrWhiteSpace(imageUrl))
+{
+    <link rel="image_src" href="@imageUrl" />
+    <meta property="og:image" content="@imageUrl" />
+}
+
+@if (!string.IsNullOrWhiteSpace(facebookAdminId))
+{
+    <meta property="fb:admins" content="@facebookAdminId" />
+}
+
+@if (!string.IsNullOrWhiteSpace(facebookPages))
+{
+    <meta property="fb:pages" content="@facebookPages" />
+}
+
+@*<script type="text/javascript">
+    window.shareSocialUrl = {
+        facebook: '@shareFacebookUrl',
+        googleplus: '@shareGooglePlusUrl'
+    }
+</script>*@

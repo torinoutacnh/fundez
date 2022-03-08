@@ -1,0 +1,165 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using Enums = TIGE.Core.Share.Constants.Enums
+@using TIGE.Contract.Repository.Models.Stacking
+@inject IConfigurationService ConfigurationService
+@inject IStackConfigService StackConfigurationService
+@{
+
+    var wallet = (StackingWalletEntity)ViewBag.wallet;
+    var config = StackConfigurationService.GetConfig();
+}
+
+@model TIGE.Core.Share.Models.CreateWithdrawStackRequestModel
+<style>
+
+    @@media only screen and (max-width: 450px) {
+        .table-responsive--md tr th, .table-responsive--md tr td {
+            padding-left: 80px !important;
+            white-space: initial;
+            word-break: break-all
+        }
+    }
+
+
+</style>
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Withdraw </span> <b class="base--color">Request</b></h2>
+                </div>
+                <div class="text-center">                   
+                    <span class="col-sm-5" onclick="">
+                        <a href="/stake/stakingwallets/withdraw"><label class="text-warning">Withdraw TIGE</label></a>
+                    </span>
+                     <span class="col-sm-5">
+                        <a href="/stake/stakingwallets/withdrawusd"><label class="text-warning">Withdraw USD</label></a>
+                    </span>
+                </div>
+                <div class="section-header" style="margin-top:50px;">
+                    <ol>
+                        <li>
+                            1. Only withdrawal with Decentralized Wallet address Network BEP20 (BSC) and confirmed by your mail. (Do not use wallet address on Exchanges)
+                        </li>
+                        <li>2. Recheck your wallet address withdrawal before confirmed by your mail.</li>
+                        <li>3. Minimum Withdrawal transaction is @config.MinWithDraw Tige.</li>
+                        <li>4. Network withdrawal fee and time proceed will depend on Network gas fee when the transactions confirm.</li>
+                        <li>
+                            5. Until the approval from the system is made, an equivalent amount of your assets will be temporarily unavailable for other transactions.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="SubmitWithdraw" method="post">
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label>Staking Wallet (TIGE)</label>
+                                <div>
+                                    <h2>@wallet.Balance.ToString("###,###,###,###0.##")</h2>
+                                </div>
+                                @*<input type="text" value="@wallet.Balance.ToString("###,###,###,###.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Amount (Tige)</label>
+                                <input type="text" asp-for="Amount" placeholder="0.00" value="@config.MinWithDraw" class="form-control">
+                                <span asp-validation-for="Amount"></span>
+                                <label class="mt-15">Wallet Address</label>
+                                <input type="text" asp-for="WalletAddress" placeholder="" value="" class="form-control">
+                                <span asp-validation-for="WalletAddress"></span>
+                                @*<label class="mt-15">TxHash</label>
+                                <input type="text" asp-for="TxHash" placeholder="" value="" class="form-control">
+                                <span asp-validation-for="TxHash"></span>*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Send Request</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive p-0" style="max-width:inherit;max-height:500px;">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Amount (TIGE)</th>
+                                <th>Fee (TIGE)</th>
+                                @*<th>Amount (ETH)</th>*@
+                                <th>Time</th>
+                                <th>Tx hash</th>
+                                @*<th>Wallet Address</th>*@
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                //var withdraws = (List<WithdrawRequestModel>)ViewBag.WithDraw;
+                                var withdraws = (IEnumerable<StackWithdrawModel>)ViewBag.WithDraw;
+                                withdraws = withdraws.Where(x => x.Status != Enums.StackWithdraw.Reject);
+
+                                foreach (var withdraw in withdraws.OrderByDescending(x=>x.CreatedTime))
+                                {
+                                    <tr>
+                                        <td data-label="ID">@withdraw.Id</td>
+                                        <td data-label="Amount (Tige)">
+                                            <span class="text-success">@withdraw.AmountTige.ToString("###,###,###,###0.##")</span>
+                                        </td>
+                                        <td data-label="Fee (Tige)">
+                                            <span class="text-success">@withdraw.FeeTige.ToString("###,###,###,###0.##")</span>
+                                        </td>
+                                        @*<td data-label="Amount (ETH)">
+                                            <span class="text-success">@withdraw.AmountETH.ToString("###,###,###,###0.######")</span>
+                                        </td>*@
+                                        <td data-label="Time">@withdraw.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        <td data-label="Tx Hash" class="tx-hash">@withdraw.TxHash</td>
+                                        @*<td data-label="Wallet Address">@withdraw.ToWalletAddress</td>*@
+                                        <td data-label="Status">@withdraw.Status.AsString(EnumFormat.DisplayName)</td>
+                                        @if (withdraw.Status != Enums.StackWithdraw.Approved && withdraw.Status != Enums.StackWithdraw.Confirming)
+                                        {
+                                            <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="deleteWithdraw('@withdraw.Id')" ><i class="fa fa-trash"></i></span></td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function deleteWithdraw(id) {
+            
+        var url = '@Url.Action("DeleteWithdraw","StackWallet", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+            
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload()
+                //location.replace('@Url.Action("Withdraw","StackingWallet")');
+            }
+        });
+    }
+
+</script>

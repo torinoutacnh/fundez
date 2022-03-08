@@ -1,0 +1,357 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Service\\TIGE.Contract.Service\\TIGE.Contract.Service.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core.Share\\TIGE.Core.Share.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core.Share\\TIGE.Core.Share.csproj",
+        "projectName": "TIGE.Core.Share",
+        "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core.Share\\TIGE.Core.Share.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core.Share\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\NuGet.Config",
+          "C:\\Users\\admin\\Desktop\\fundez\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/orchestrated-release-2-1/20180515-07/final/index.json": {},
+          "https://www.myget.org/F/aspnet-contrib/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Elect.Core": {
+              "target": "Package",
+              "version": "[3.1.2.3, )"
+            },
+            "Elect.DI": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Elect.Data.IO": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Elect.Jaeger": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Elect.Job.Hangfire": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Elect.Logger": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Elect.Mapper.AutoMapper": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Elect.Notification.Esms": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Elect.Notification.OneSignal": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Elect.Web": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Elect.Web.DataTable": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Elect.Web.HealthCheck": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Elect.Web.HttpDetection": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Elect.Web.Middlewares": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Elect.Web.Swagger": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Enums.NET": {
+              "target": "Package",
+              "version": "[3.0.3, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.2.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj",
+        "projectName": "TIGE.Core",
+        "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\NuGet.Config",
+          "C:\\Users\\admin\\Desktop\\fundez\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/orchestrated-release-2-1/20180515-07/final/index.json": {},
+          "https://www.myget.org/F/aspnet-contrib/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core.Share\\TIGE.Core.Share.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core.Share\\TIGE.Core.Share.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.8.0, )"
+            },
+            "Sendgrid": {
+              "target": "Package",
+              "version": "[9.21.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Repository\\TIGE.Contract.Repository\\TIGE.Contract.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Repository\\TIGE.Contract.Repository\\TIGE.Contract.Repository.csproj",
+        "projectName": "TIGE.Contract.Repository",
+        "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Repository\\TIGE.Contract.Repository\\TIGE.Contract.Repository.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Repository\\TIGE.Contract.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\NuGet.Config",
+          "C:\\Users\\admin\\Desktop\\fundez\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/orchestrated-release-2-1/20180515-07/final/index.json": {},
+          "https://www.myget.org/F/aspnet-contrib/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Elect.Data.EF": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Service\\TIGE.Contract.Service\\TIGE.Contract.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Service\\TIGE.Contract.Service\\TIGE.Contract.Service.csproj",
+        "projectName": "TIGE.Contract.Service",
+        "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Service\\TIGE.Contract.Service\\TIGE.Contract.Service.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Service\\TIGE.Contract.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\NuGet.Config",
+          "C:\\Users\\admin\\Desktop\\fundez\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/orchestrated-release-2-1/20180515-07/final/index.json": {},
+          "https://www.myget.org/F/aspnet-contrib/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Cross\\TIGE.Core\\TIGE.Core.csproj"
+              },
+              "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Repository\\TIGE.Contract.Repository\\TIGE.Contract.Repository.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\fundez\\FundezStack\\src\\Repository\\TIGE.Contract.Repository\\TIGE.Contract.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

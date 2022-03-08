@@ -1,0 +1,35 @@
+﻿@using TIGE.Core.Constants
+@{
+    ViewData[ViewDataKey.Title] = Messages.Auth.PageTitleAuthorized;
+}
+<meta name="robots" content="noindex">
+<meta name="googlebot" content="noindex">
+
+<div class="m-stack m-stack--hor m-stack--desktop">
+    <div class="m-stack__item m-stack__item--fluid">
+        <div class="m-login__wrapper">
+            <div class="m-login__logo">
+                <img src="/assets/images/logo.png" alt="TIGE Logo" />
+            </div>
+            <div class="m-login__signin">
+                <div class="m-login__head">
+                    <h3 class="m-login__title">
+                        Authorized
+                    </h3>
+                    <div class="m-login__desc">
+                        On the way! Redirect...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var redirectUri = '@ViewBag.RedirectUri';
+            window.location.replace(redirectUri);
+        });
+    </script>
+}

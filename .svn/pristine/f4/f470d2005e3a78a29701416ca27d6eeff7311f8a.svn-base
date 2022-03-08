@@ -1,0 +1,13 @@
+﻿using System;
+
+namespace TIGE.Core.Share.Models
+{
+    public class DashboardModel
+    {
+  
+        public int TotalSlots { get; set; }
+        public double TotalCommission { get; set; }
+        public double TotalToken { get; set; }
+
+    }
+}

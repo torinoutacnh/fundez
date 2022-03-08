@@ -1,0 +1,133 @@
+﻿@using Elect.Web.DataTable
+@using Elect.Web.DataTable.Models.Column
+@using TIGE.Core.Share.Constants
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Models.User
+@using SystemHelper = TIGE.Core.Utils.SystemHelper
+@using TIGE.Models.Constants
+
+@{
+    ViewData[ViewDataKey.Title] = "Transfer";
+
+    // Get model
+    const string modelId = "datatable_transfer";
+    
+    //var model = Html.DataTableModel<WithdrawRequestModel>(modelId, SystemHelper.GetAbsoluteEndpoint(ApiEndpoint.StackWallet.GetWithdrawTransferDataTableEndpoint));
+    var model = Html.DataTableModel<TransferRequestModel>(modelId, SystemHelper.GetAbsoluteEndpoint(ApiEndpoint.StackWallet.GetWithdrawTransferDataTableEndpoint));
+    
+    model.GlobalJsVariableName = modelId;
+
+    // Additional Columns
+    model.Columns.Add(new ColumnModel("Action", typeof(string))
+    {
+        DisplayName = "Action",
+        IsSearchable = false,
+        IsSortable = false,
+        CssClass = "text-center",
+        MRenderFunction = "actionColRender"
+    });
+}
+
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                Home
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Transfer Management
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-users"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        Transfer Management
+                        <small>
+                            Handle All Transfers existed in system.
+                        </small>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            @await Html.PartialAsync("/Areas/StackAdmin/Views/Shared/DataTable/_DataTableHtml.cshtml", model).ConfigureAwait(true)
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("/Areas/StackAdmin/Views/Shared/DataTable/_DataTableScript.cshtml", model).ConfigureAwait(true)
+
+    <script>
+        function actionColRender(data, type, row) {
+            var id = window['@modelId'].getDataAt(row, 0);
+            
+            var editUrl = global.endpoint.page.transfer.edit.replace(/PARAMETER_ID/g, id);
+
+            var editHtml = [
+                '<a href="' + editUrl + '"',
+                ' class="m-portlet__nav-link btn m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill"',
+                ' data-placement="left"',
+                ' data-toggle="m-tooltip" data-skin="dark"',
+                ' title="" data-original-title="Edit"',
+                '>',
+                '  <i class="la la-edit"></i>',
+                '</a>'
+            ].join("\n");
+
+            var removeHtml = [
+                '<span',
+                ' class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"',
+                ' data-placement="left"',
+                ' data-toggle="m-tooltip" data-skin="dark" ',
+                ' title="" data-original-title="Delete"',
+                ' data-plugins="confirm" data-confirm-yes-callback="deleteWallet(\'' + id + '\')"',
+                '>',
+                '  <i class="la la-trash"></i>',
+                '</span>'
+            ].join("\n");
+
+            return editHtml + removeHtml;
+        }
+
+        function deleteWallet(id) {
+            
+            var url = global.endpoint.api.transfer.delete.replace(/PARAMETER_ID/g, id);
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function() {
+                    window['@modelId'].api().ajax.reload();
+                }
+            });
+        }
+    </script>
+}

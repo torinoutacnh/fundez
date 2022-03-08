@@ -1,0 +1,146 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Utils
+@using TIGE.Core.Utils
+@model TIGE.Core.Share.Models.CreateDepositRequestModel
+@inject IConfigurationService ConfigurationService
+@inject ICommonService CommonService
+@inject IUserService UserService
+@inject IBusinessService BusinessService
+@{
+
+    var businessData = (List<BusinessDetailModel>)ViewBag.Business;
+    var config = ConfigurationService.GetConfig();
+    var members = await CommonService.GetTotalMember(LoggedInUser.Current.Id);
+    var slots = await UserService.GetSlot(members.Select(x => x.Id).ToList());
+    var total = await BusinessService.GetTotalCommission(LoggedInUser.Current.Id);
+}
+
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <div class="row mb-none-30">
+                        <div class="col-lg-12 mb-30">
+                            <label>Reflink</label><br />
+                            @*<input type="text" value="@config?.TotalDepositWallet" onclick="copyTextToClipboard(this)" placeholder="0.00" class="form-control base--bg" readonly="readonly">*@
+                            <label class="">@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}",LoggedInUser.Current.Code))</label>
+                            <div class="input-group mb-3">
+                                <input type="hidden" class="form-control base--bg" value="@(SystemHelper.Setting.ReferFormatLink.Replace("{{code}}",LoggedInUser.Current.Code))"
+                                       id="main-link" readonly="readonly" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="cmn-btn" type="button" onclick="copyTextToClipboard('#main-link')">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-30">
+                            <label>Total member</label><br />
+                            <h2 class="">@members.Count</h2>
+                            @*<input type="text" value="@members.Count" class="form-control base--bg" readonly="readonly">*@
+
+
+                        </div>
+                        <div class="col-lg-12 mb-30">
+                            <label>Total Slot (member)</label><br />
+                            <h2 class="">@slots.Sum(x => x.Quantity)</h2>
+                            @*<input type="text" value="@slots.Sum(x=>x.Quantity)" class="form-control base--bg" readonly="readonly">*@
+                        </div>
+                        <div class="col-lg-12 mb-30">
+                            <label>Total Commission</label><br />
+                            <h2 class="">@total.ToString("##,###,###0.##")</h2>
+                            @*<input type="text" value="@total.ToString("##,###,###.##")" class="form-control base--bg" readonly="readonly">*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive--md p-0">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Time</th>
+                                <th>Amount (USD)</th>
+                                <th>From User</th>
+                                <th>Amount (Slot)</th>
+                                <th>Commission</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (businessData != null)
+                            {
+                                foreach (var detailModel in businessData.OrderByDescending(x=>x.Date))
+                                {
+                                    <tr>
+                                        <td data-label="ID">@detailModel.Id</td>
+                                        <td data-label="Time">@detailModel.Date.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        <td data-label="Amount (USD)">
+                                            <span class="text-success">@Math.Round(detailModel.AmountUSD, 2)</span>
+                                        </td>
+                                        <td data-label="From User">@detailModel.From</td>
+                                        <td data-label="Amount (Slot)">
+                                            <span class="text-success">@detailModel.AmountSlot</span>
+                                        </td>
+                                        <td data-label="Commission">
+                                            <span class="text-success">@Math.Round(detailModel.Commission, 2)</span>
+                                        </td>
+                                        <td data-label="Status">
+                                            <span class="base--success">@detailModel.Status.AsString(EnumFormat.DisplayName)</span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function fallbackCopyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            global.util.notify("Copied ! ", text, "info");
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+
+        document.body.removeChild(textArea);
+    }
+    function copyTextToClipboard() {
+
+        var text = $("#main-address").val();
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+        }
+
+        navigator.clipboard.writeText(text);
+        global.util.notify("Copied ! ", text, "info");
+    }
+
+
+</script>

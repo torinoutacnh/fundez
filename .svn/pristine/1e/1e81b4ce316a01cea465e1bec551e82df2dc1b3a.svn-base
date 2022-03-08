@@ -1,0 +1,172 @@
+﻿@using TIGE.Core.Share.Utils
+@model TIGE.Core.Share.Models.WithdrawRequestModel
+@{
+    ViewData[ViewDataKey.Title] = "Withdraw";
+
+    List<Enums.WithdrawStatus> currentSelectList = new List<Enums.WithdrawStatus>();
+    var returnAction = "";
+    if (Model.Status == Enums.WithdrawStatus.New
+|| Model.Status == Enums.WithdrawStatus.Approved
+|| Model.Status == Enums.WithdrawStatus.Reject
+|| Model.Status == Enums.WithdrawStatus.Confirming )
+    {
+        currentSelectList.Add(Enums.WithdrawStatus.New);
+        currentSelectList.Add(Enums.WithdrawStatus.Approved);
+        currentSelectList.Add(Enums.WithdrawStatus.Reject);
+        currentSelectList.Add(Enums.WithdrawStatus.Confirming);
+        returnAction = "Withdraw";
+    }
+
+    else
+    {
+        currentSelectList.Add(Enums.WithdrawStatus.TokenApproved);
+        currentSelectList.Add(Enums.WithdrawStatus.TokenConfirming);
+        currentSelectList.Add(Enums.WithdrawStatus.TokenNew);
+        currentSelectList.Add(Enums.WithdrawStatus.TokenReject);
+        returnAction = "WithdrawTige";
+    }
+    SelectList selects = new SelectList(currentSelectList);
+
+}
+
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                Home
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.Action("Withdraw", "Wallet", new {Area= "Portal"})" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Withdraw Management
+                        </span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <a href="@Url.AbsoluteAction("EditWithdraw", "Wallet", new {id = Model.Id})" class="m-nav__link">
+                        <span class="m-nav__link-text">
+                            Update Withdraw Request
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-users"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        Update Withdraw
+                        <small>
+
+                        </small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <form id="edit-user-form" asp-controller="Wallet" asp-action="SubmitEditWithdraw" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="post" enctype="multipart/form-data" asp-antiforgery="true" role="form">
+            <input asp-for="Id" type="hidden" />
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group row">
+                    <label asp-for="AmountETH" class="col-lg-2 col-form-label">Amount (ETH)</label>
+                    <div class="col-lg-3">
+                        <input asp-for="AmountETH" type="number" class="form-control m-input" readonly="readonly">
+                        <span asp-validation-for="AmountETH" class="form-control-feedback"></span>
+                    </div>
+
+                    <label asp-for="Rate" class="col-lg-2 col-form-label">Rate</label>
+                    <div class="col-lg-3">
+                        <input asp-for="Rate" type="number" class="form-control m-input" onchange="updateETH()">
+                        <span asp-validation-for="Rate" class="form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label asp-for="AmountUSD" class="col-lg-2 col-form-label">Amount (USD)</label>
+                    <div class="col-lg-3">
+                        <input asp-for="AmountUSD" type="text" class="form-control m-input" readonly="readonly">
+                        <span asp-validation-for="AmountUSD" class="form-control-feedback"></span>
+                    </div>
+
+                    <label asp-for="FeeUSD" class="col-lg-2 col-form-label">Fee (USD)</label>
+                    <div class="col-lg-3">
+                        <input asp-for="FeeUSD" type="text" class="form-control m-input" onchange="updateETH()">
+                        <span asp-validation-for="FeeUSD" class="form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label asp-for="Status" class="col-lg-2 col-form-label"></label>
+                    <div class="col-lg-3">
+                        @*<select asp-for="Status" class="form-control" data-plugins="select2" asp-items="Html.GetEnumSelectList<Enums.WithdrawStatus>()">selects</select>*@
+                        <select asp-for="Status" class="form-control" data-plugins="select2" asp-items="selects"></select>
+                        <span asp-validation-for="Status" class="form-control-feedback"></span>
+                    </div>
+                    <label asp-for="TxHash" class="col-lg-2 col-form-label"></label>
+                    <div class="col-lg-3">
+                        @*<input asp-for="TxHash" type="text" class="form-control m-input">*@
+                        <input name="TxHash" type="text" class="form-control m-input">
+                        <span asp-validation-for="TxHash" class="form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-lg-2 col-form-label">Wallet Address</label>
+                    <div class="col-lg-3">
+                        <input asp-for="FromWalletId" type="text" class="form-control m-input" readonly>
+                        <span asp-validation-for="FromWalletId" class="form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions--solid">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <button type="submit" class="btn btn-success" data-plugins="loader">
+                                Save
+                            </button>                            
+                            @*<a href="@Url.Action("Withdraw", "Wallet", new { Area ="Portal"})" class="btn btn-secondary">
+                                Cancel
+                            </a>*@
+                            <a href="@Url.Action(returnAction, "Wallet", new { Area ="Portal"})" class="btn btn-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updateETH() {
+        var usd = $("#AmountUSD").val();
+        var fee = $("#FeeUSD").val();
+        var rate = $("#Rate").val();
+        $("#AmountETH").val((usd-fee)/rate);
+    }
+
+
+    $(document).ready(function () {
+        updateETH();
+    });
+
+   
+</script>

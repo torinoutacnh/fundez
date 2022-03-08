@@ -1,0 +1,20 @@
+﻿{
+  "ConnectionString": {
+    //"LINH-NGUYEN": "Data Source=45.32.112.116;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True",
+    //"LINH-NGUYEN": "Data Source=localhost\\SQLExpress;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True",
+    "Development": "Data Source=45.119.82.72;Initial Catalog=testfundez;User ID=sa;Password=h9P33fQ5;Trusted_Connection=False;MultipleActiveResultSets=True"
+    //"Development": "Data Source=45.32.112.116, 1433;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True"
+  },
+
+  "CommandTimeoutInSecond": {
+    "Development": 300,
+    "Staging": 300,
+    "Production": 300
+  },
+
+  "DbContextPoolSize": {
+    "Development": 128,
+    "Staging": 128,
+    "Production": 128
+  }
+}

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Information -->
+  <PropertyGroup>
+    <Authors>Linh Nguyen</Authors>
+    <Copyright>http://topnguyen.net</Copyright>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+    <!-- Output -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>.\bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+    <PackageReference Include="ZXing.Net" Version="0.14.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cross\TIGE.Core\TIGE.Core.csproj" />
+    <ProjectReference Include="..\..\Repository\TIGE.Contract.Repository\TIGE.Contract.Repository.csproj" />
+    <ProjectReference Include="..\TIGE.Contract.Service\TIGE.Contract.Service.csproj" />
+  </ItemGroup>
+</Project>

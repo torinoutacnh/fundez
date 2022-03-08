@@ -1,0 +1,103 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using TIGE.Core.Share.Models.Slot
+@using TIGE.Core.Share.Utils
+@inject IConfigurationService ConfigurationService
+@{
+    var config = ConfigurationService.GetConfig();
+    var slots  = (List<DetailSlotRequestModel>)ViewBag.Slots;
+}
+
+@model SubmitSlotModel
+
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Buy Slot </span> <b class="base--color">Request</b></h2>
+                    <p>You must know the calculation before investing in any plan, so you never make mistakes. Check the calculation and you will get as our calculator says.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="SubmitBuySlot" method="post"  >
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label>Balance (USD)</label>
+                                <div>
+                                    <h2>@LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.##")</h2>
+                                </div>
+                                @*<input type="text" value="@LoggedInUser.Current.WalletBalance.ToString("##,###,###,###0.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Slot Price (USD)</label>
+                                <div>
+                                    <h2>@config.SlotPrice.ToString("##,###,###,###0.##0")</h2>
+                                </div>
+                                @*<input type="text" value="@config.SlotPrice.ToString("##,###,###,###0.##")" readonly="readonly" class="form-control base--bg">*@
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <label>Slot</label>
+                                <input type="text" asp-for="Quantity" placeholder="0" class="form-control">
+                                <span asp-validation-for="Quantity"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Buy Slot</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive--md p-0">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Quantity</th>
+                            <th>Unit Price (USD)</th>
+                            <th>Total Amount (USD)</th>
+                            <th>Token Quantity (TIGE)</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @{
+
+                            foreach (var slot in slots.OrderByDescending(x=>x.Time))
+                            {
+                                <tr>
+                                    <td data-label="ID">@slot.Id</td>
+                                    <td data-label="Quantity">
+                                        <span class="text-success">@slot.Quantity.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Unit Price (USD)">
+                                        <span class="text-success">@slot.UnitPrice.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Total Amount (USD)">
+                                        <span class="text-success">@slot.TotalAmount.ToString("###,###,###,###0.##")</span>
+                                    </td>
+                                    <td data-label="Token Quantity (TIGE)">
+                                        <span class="text-success">@slot.TokenQuantity.ToString("###,###,###,###0.####")</span>
+                                    </td>
+                                    <td data-label="Time">@slot.Time.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                    <td data-label="Time">@slot.Status.AsString(EnumFormat.DisplayName)</td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

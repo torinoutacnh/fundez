@@ -1,0 +1,115 @@
+﻿@using TIGE.Utils.Notification.Models
+@using Elect.Web.ITempDataDictionaryUtils
+@using EnumsNET
+@using TIGE.Core.Share.Constants
+@using TIGE.Core.Share.Utils
+
+@{
+    var loggedInUserJson = LoggedInUser.Current == null
+        ? Html.Raw("{}")
+        : Html.Raw(JsonConvert.SerializeObject(LoggedInUser.Current, Formattings.JsonSerializerSettings));
+}
+
+<!-- jQuery library -->
+
+
+
+<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/vendor/slick.min.js"></script>
+<script src="/assets/js/vendor/wow.min.js"></script>
+<script src="/assets/js/contact.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="/js/core.js"></script>
+@*<script src="@Url.AbsoluteContent("~/portal/js/core.js")" type="text/javascript"></script>*@
+
+<script type="text/javascript">
+    $('form').each(function () {
+        if ($(this).data('validator'))
+            $(this).data('validator').settings.ignore = ".note-input *";
+    });
+
+    //(function(d, s, id) {
+    //        var js, fjs = d.getElementsByTagName(s)[0];
+    //        if (d.getElementById(id)) return;
+    //        js = d.createElement(s); js.id = id;
+    //        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+    //        fjs.parentNode.insertBefore(js, fjs);
+    //}(document, 'script', 'facebook-jssdk'));
+
+
+    function fallbackCopyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            global.util.notify("Copied ! ", text, "info");
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+
+        document.body.removeChild(textArea);
+    }
+
+    function copyTextToClipboard(input) {
+
+        var text = $(input).val();
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+        }
+
+        navigator.clipboard.writeText(text);
+        global.util.notify("Copied ! ", text, "info");
+    }
+
+    global.config = {
+        imageDeadUrl: "https://cfl.dropboxstatic.com/static/images/avatar/faceholder-vflGRnT85.svg",
+        dateTimeFormat: '@Formattings.DateTimeFormat',
+        dateFormat: '@Formattings.DateFormat',
+        timeFormat: '@Formattings.TimeFormat',
+        timeZone: '@Formattings.TimeZone'
+    }
+
+    global.endpoint = {
+        api: {
+            user: {
+                delete: '@Url.Action("Delete", "User", new { area = "Api", id = "PARAMETER_ID"})'
+            },
+            image: {
+                delete: '@Url.Action("Delete", "Image", new {area = "Api", id = "PARAMETER_ID"})',
+                uploadMultiPart: '@Url.Action("UploadMultiPart", "Image", new {area = "Api"})'
+            },
+        },
+        page: {
+            user: {
+                edit:  '@Url.Action("Edit", "User", new { area = "Portal", id = "PARAMETER_ID"})'
+            },
+        }
+    };
+
+    global.currentUser = @loggedInUserJson;
+
+    $(function() {
+        @{
+            var notifyData = TempData.Get<NotificationModel>(TempDataKey.Notify);
+            TempData.Remove(TempDataKey.Notify);
+
+            if (notifyData != null)
+            {
+                string type = notifyData.Status.AsString(EnumFormat.DisplayName);
+                @Html.Raw($"global.util.notify('{notifyData.Title}', '{notifyData.Message}', '{type}');")
+            }
+        }
+    })
+</script>

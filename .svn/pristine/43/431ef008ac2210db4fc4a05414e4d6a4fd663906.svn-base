@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Information -->
+  <PropertyGroup>
+    <Authors>Linh Nguyen</Authors>
+    <Copyright>http://topnguyen.net</Copyright>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+    <!-- Output -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>.\bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- KDS -->
+    <!-- Elect -->
+    <!-- Email -->
+    <!--<PackageReference Include="AWSSDK.Core" Version="3.7.2.1" />-->
+    <PackageReference Include="MailKit" Version="2.8.0" />
+    <PackageReference Include="Sendgrid" Version="9.21.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TIGE.Core.Share\TIGE.Core.Share.csproj" />
+  </ItemGroup>
+</Project>

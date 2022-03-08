@@ -1,0 +1,19 @@
+﻿{
+  "ConnectionString": {
+    "LINH-NGUYEN": "Data Source=45.32.112.116;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True",
+    //"LINH-NGUYEN": "Data Source=localhost\\SQLExpress;Initial Catalog=fundez.co;User ID=fundez.co;Password=fundez.co;Trusted_Connection=False;MultipleActiveResultSets=True",
+    "Development": "Data Source=SG2NWPLS14SQL-v05.shr.prod.sin2.secureserver.net:1433;Initial Catalog=fundez.co;User ID=fundez.co;Password=8Mob3n8@;Trusted_Connection=False;MultipleActiveResultSets=True"
+  },
+
+  "CommandTimeoutInSecond": {
+    "Development": 300,
+    "Staging": 300,
+    "Production": 300
+  },
+
+  "DbContextPoolSize": {
+    "Development": 128,
+    "Staging": 128,
+    "Production": 128
+  }
+}

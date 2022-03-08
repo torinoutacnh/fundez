@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "712ec0d3-ca8a-4f6a-8208-a916bf78422c": {
+      "ProjectGuid": "712ec0d3-ca8a-4f6a-8208-a916bf78422c",
+      "DisplayName": "TIGE",
+      "ColorIndex": 0
+    },
+    "9619d5a2-20d7-45a1-9abf-87b2a70485dd": {
+      "ProjectGuid": "9619d5a2-20d7-45a1-9abf-87b2a70485dd",
+      "DisplayName": "TIGE.Contract.Repository",
+      "ColorIndex": 1
+    },
+    "618a34f0-4efb-4dea-9240-6bdbf0920356": {
+      "ProjectGuid": "618a34f0-4efb-4dea-9240-6bdbf0920356",
+      "DisplayName": "TIGE.Repository",
+      "ColorIndex": 2
+    },
+    "fb3c9174-bfaf-4911-b5d7-c4619e921956": {
+      "ProjectGuid": "fb3c9174-bfaf-4911-b5d7-c4619e921956",
+      "DisplayName": "TIGE.Contract.Service",
+      "ColorIndex": 3
+    },
+    "f764c810-76cd-4e7d-bbb9-7f5885ff5e4e": {
+      "ProjectGuid": "f764c810-76cd-4e7d-bbb9-7f5885ff5e4e",
+      "DisplayName": "TIGE.Service",
+      "ColorIndex": 4
+    },
+    "cad6943c-bff0-41d6-8dfb-409a8b474a5f": {
+      "ProjectGuid": "cad6943c-bff0-41d6-8dfb-409a8b474a5f",
+      "DisplayName": "TIGE.Core",
+      "ColorIndex": 5
+    },
+    "dacc968a-9b1b-4f9d-8c9d-1bd9ec10bef6": {
+      "ProjectGuid": "dacc968a-9b1b-4f9d-8c9d-1bd9ec10bef6",
+      "DisplayName": "TIGE.Core.Share",
+      "ColorIndex": 6
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "9f6791cc-d13b-4853-9d45-f36c1367e60d": {
+      "ProjectGuid": "9f6791cc-d13b-4853-9d45-f36c1367e60d",
+      "DisplayName": "TIGE.Mapper",
+      "ColorIndex": 7
+    },
+    "ec5f0a5a-a06a-41a6-b8f5-b3072f4bef7a": {
+      "ProjectGuid": "ec5f0a5a-a06a-41a6-b8f5-b3072f4bef7a",
+      "DisplayName": "StakeConsole",
+      "ColorIndex": 8
+    },
+    "d79c827a-4454-47e0-bce9-e54c98fe652b": {
+      "ProjectGuid": "d79c827a-4454-47e0-bce9-e54c98fe652b",
+      "DisplayName": "StakeConsole",
+      "ColorIndex": 9
+    }
+  },
+  "NextColorIndex": 10
+}

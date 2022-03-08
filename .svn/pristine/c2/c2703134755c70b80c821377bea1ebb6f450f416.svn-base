@@ -1,0 +1,133 @@
+﻿<button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
+    <i class="la la-close"></i>
+</button>
+<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light">
+    <div class="m-brand  m-brand--skin-light ">
+        <a href="@Url.Action("Index", "Admin")" class="m-brand__logo">
+            <img alt="" src="~/assets/images/logo.png" />
+        </a>
+    </div>
+    <div id="m_ver_menu"
+         class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light"
+         data-menu-vertical="true"
+         m-menu-scrollable="true" m-menu-dropdown-timeout="500">
+        <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow pt-0">
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="User Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="User Management">
+                <a href="@Url.Action("Index","User", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-user"></i>
+                    <span class="m-menu__link-text">
+                        User Management
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="Deposit Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="Deposit Management">
+                <a href="@Url.Action("Index","StackWallet", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-information"></i>
+                    <span class="m-menu__link-text">
+                        Deposit Management
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="Withdraw TIGE Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="Withdraw TIGE Management">
+                <a href="@Url.Action("Withdraw","StackWallet", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-analytics"></i>
+                    <span class="m-menu__link-text">
+                        Withdraw TIGE Management
+                    </span>
+                </a>
+            </li>
+                        
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="Withdraw USD Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="Withdraw USD Management">
+                <a href="@Url.Action("Convert","StackWallet", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-pie-chart"></i>
+                    <span class="m-menu__link-text">
+                        Withdraw USD Management
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="Transfer Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="Slot Management">
+                <a href="@Url.Action("Transfer","StackWallet", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-coins"></i>
+                    <span class="m-menu__link-text">
+                        Slot Management
+                    </span>
+                </a>
+            </li>
+                        
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="Subscription Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="Stack Management">
+                <a href="@Url.Action("Index","StackSubscription", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-graph"></i>
+                    <span class="m-menu__link-text">
+                        Subscription Management
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="Reward Management"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="Reward Management">
+                <a href="@Url.Action("GetReward","StackSubscription", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-rocket"></i>
+                    <span class="m-menu__link-text">
+                        Reward Management
+                    </span>
+                </a>
+            </li>
+
+             <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="User Subscription"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="User Subscription">
+                <a href="@Url.Action("GetSubscriptionList","StackSubscription", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-pie-chart"></i>
+                    <span class="m-menu__link-text">
+                        User Subscription
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__item" m-menu-link-redirect="1"
+                data-toggle="m-tooltip" title="System Configuration"
+                data-placement="right"
+                data-skin="dark"
+                data-original-title="System Configuration">
+                <a href="@Url.Action("Config","StackSubscription", new { Area="StackAdmin"})" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-settings"></i>
+                    <span class="m-menu__link-text">
+                        System Configuration
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="m-aside-menu-overlay"></div>

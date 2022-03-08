@@ -1,0 +1,152 @@
+﻿@using System.Text.RegularExpressions
+@using AutoMapper
+@using TIGE.Contract.Service
+@using TIGE.Core.Models.Configuration
+@using TIGE.Core.Share.Utils
+@using TIGE.Core.Utils
+@inject IConfigurationService ConfigurationService
+@{
+    var config = ConfigurationService.GetConfig();
+}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    @{
+
+        await Html.RenderPartialAsync("_Meta").ConfigureAwait(true);
+        await Html.RenderPartialAsync("_Favicon").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_Style").ConfigureAwait(true);
+        await Html.RenderPartialAsync("Assets/_TopScript").ConfigureAwait(true);
+        await RenderSectionAsync("Styles", required: false).ConfigureAwait(true);
+    }
+
+    <link href="/assets/css/alert/dark.css" rel="stylesheet" />
+
+    <style>
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="preloader-container">
+            <span class="animated-preloader"></span>
+        </div>
+    </div>
+
+    <!-- scroll-to-top start -->
+    <div class="scroll-to-top">
+        <span class="scroll-icon">
+            <i class="fa fa-rocket" aria-hidden="true"></i>
+        </span>
+    </div>
+    <!-- scroll-to-top end -->
+
+    <div class="full-wh">
+        <!-- STAR ANIMATION -->
+        <div class="bg-animation">
+            <div id="stars"></div>
+            <div id="stars2"></div>
+            <div id="stars3"></div>
+            <div id="stars4"></div>
+        </div><!-- / STAR ANIMATION -->
+    </div>
+    <div class="page-wrapper">
+        <!-- header-section start  -->
+        <header class="header">
+            <div class="header__bottom bg-blue">
+                <div class="container">
+                    <nav class="navbar navbar-expand-xl p-0 align-items-center">
+                        <a class="site-logo site-title" href="@Url.Action("Index", "Home")"><img src="/assets/images/logo.png" alt="site-logo"></a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu-toggle"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent22">
+                            <ul class="navbar-nav main-menu m-auto">
+                                <li> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                                @if (!string.IsNullOrWhiteSpace(LoggedInUser.Current.WalletId))
+                                {
+                                <li> <a href="@Url.Action("Index","Wallet")">Deposit</a></li>
+                                <li> <a href="@Url.Action("Withdraw","Wallet")">Withdraw</a></li>
+                                <li><a href="@Url.Action("Index","Slot")">Token</a></li>
+                                <li><a href="@Url.Action("Index","Token")">Selling</a></li>
+                                <li><a href="@Url.Action("Index","Business")">Business</a></li>
+                                }
+                                <li><a href="@Url.Action("Policy","Home")">Affiliate</a></li>
+                                <li class="menu-toggle-li"><a href="@Url.Action("SignOut","Auth")">Sign Out</a></li>
+                            </ul>
+                            <div class="nav-right">
+
+                                <ul class="navbar-nav main-menu m-auto">
+                                    <li class="menu_has_children">
+                                        <a href="@Url.Action("Index","Profile")" class="menu-toggle-li">@LoggedInUser.Current.Email</a>
+                                        <a href="#" class="non-menu-toggle-li">@LoggedInUser.Current.Email</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="@Url.Action("Index","Profile")">Profile</a></li>
+                                            <li><a href="@Url.Action("SignOut","Auth")">Sign Out</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                @*<label>@LoggedInUser.Current.Email</label>*@
+                                @*<select class="select d-inline-block w-auto ml-xl-3">
+                                        <option>Eng</option>
+                                        <option>Ban</option>
+                                        <option>Hin</option>
+                                    </select>*@
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div><!-- header__bottom end -->
+        </header>
+        <!-- header-section end  -->
+        <div>
+            @RenderBody()
+        </div>
+
+        <!-- subscribe section end -->
+        <!-- footer section start -->
+        <footer class="footer bg_img" data-background="/assets/images/bg/bg-7.jpg">
+            <div class="footer__top">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 text-center">
+                            <a href="#0" class="footer-logo"><img src="/assets/images/logo.png" alt="image"></a>
+                            <ul class="footer-short-menu d-flex flex-wrap justify-content-center mt-4">
+                                <li><a href="#0">Home</a></li>
+                                <li><a href="@Url.Action("Privacy","Home")">Privacy Policy</a></li>
+                                <li><a href="@Url.Action("TermCondition","Home")">Terms of Use</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-md-left text-center">
+                            <p>© 2020 <a href="@SystemHelper.Setting.Domain" class="base--color">@SystemHelper.Setting.ApplicationName</a>. All rights reserved</p>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="social-link-list d-flex flex-wrap justify-content-md-end justify-content-center">
+                                <li><a href="https://t.me/@config.TelegramLink" data-toggle="tooltip" data-placement="top" title="Telegram"><i class="lab la-telegram"> @config.TelegramLink</i></a></li>
+                                @if (!string.IsNullOrWhiteSpace(config.SupportEmail))
+                                {
+                                <li><a href="#0" data-toggle="tooltip" data-placement="top" title="Support">@config.SupportEmail</a></li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer section end -->
+    </div> <!-- page-wrapper end -->
+    <!-- jQuery library -->
+
+    @{
+        await Html.RenderPartialAsync("Assets/_BottomScript").ConfigureAwait(true);
+        await RenderSectionAsync("Scripts", required: false).ConfigureAwait(true);
+    }
+</body>
+</html>

@@ -1,0 +1,66 @@
+*:focus {
+  outline: none;
+}
+
+::selection {
+  color: #f7f7f7;
+  background: $semi-brand-color;
+}
+
+/*
+    Hidden
+ */
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+/*
+    Font Size
+ */
+
+.font-size-1em {
+  font-size: 1em !important;
+}
+
+/*
+  Cursor
+ */
+
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+.form-control-feedback {
+  color: #f4516c;
+}
+
+.form-control[readonly] {
+  border-color: #f4f5f8;
+  color: #6f727d;
+  background-color: #f4f5f8;
+}

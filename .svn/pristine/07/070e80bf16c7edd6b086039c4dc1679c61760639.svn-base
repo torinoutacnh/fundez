@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Information -->
+  <PropertyGroup>
+    <Authors>Linh Nguyen</Authors>
+    <Copyright>http://topnguyen.net</Copyright>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+    <!-- Output -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>.\bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cross\TIGE.Core\TIGE.Core.csproj" />
+    <ProjectReference Include="..\..\Repository\TIGE.Contract.Repository\TIGE.Contract.Repository.csproj" />
+  </ItemGroup>
+</Project>

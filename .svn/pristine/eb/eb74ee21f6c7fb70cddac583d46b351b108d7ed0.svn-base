@@ -1,0 +1,84 @@
+﻿using Elect.Data.EF.Interfaces.DbContext;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using System;
+using System.Linq;
+using TIGE.Contract.Repository.Interfaces;
+using TIGE.Contract.Repository.Models.Stacking;
+using TIGE.Core.Share.Constants;
+using TIGE.Repository;
+
+namespace Reward
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File($"logs\\log.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            Log.Information($"Start at {DateTimeOffset.Now.ToString("dd/MM/yy")}");
+            //setup our DI
+            var serviceProvider = new ServiceCollection()
+                .AddTigeDbContext()
+                .AddMemoryCache()
+                .AddScoped<IRepository<StackHistoryEntity>,Repository<StackHistoryEntity>>()
+                .AddScoped<IRepository<HistoryRefundEntity>, Repository<HistoryRefundEntity>>()
+                .AddScoped<IRepository<StackingWalletEntity>, Repository<StackingWalletEntity>>()
+                .BuildServiceProvider();
+
+
+            //do the actual work here
+            var db = serviceProvider.GetRequiredService<IDbContext>();
+            var cache = serviceProvider.GetRequiredService<IMemoryCache>();
+            var stakes = serviceProvider.GetRequiredService<IRepository<StackHistoryEntity>>();
+            var refunds = serviceProvider.GetRequiredService<IRepository<HistoryRefundEntity>>();
+            var wallets = serviceProvider.GetRequiredService<IRepository<StackingWalletEntity>>();
+            var cacheKey = "StackDashboard_";
+            var _cacheKeyPrefix = "User_";
+
+            var currenStaking = stakes.Get(x => x.Status == Enums.StackState.Staking);
+            var walletids = currenStaking.Select(x => x.WalletId);
+            var userids = wallets.Get(x => walletids.Contains(x.Id)).Select(x=>x.UserId);
+
+            var todayReward = refunds.Get(x => x.CreatedTime > DateTime.Today);
+
+            foreach (var stake in currenStaking)
+            {
+                if (stake.DateEnd < DateTimeOffset.Now)
+                {
+                    stake.Status = Enums.StackState.Finished;
+                    stakes.Update(stake, x => x.Status);
+                }
+                else
+                {
+                    var count = todayReward.Where(x => x.FromStack == stake.Id && x.CreatedTime.Day == DateTime.Now.Day).Count();
+                    if (count == 0)
+                    {
+                        var refund = new HistoryRefundEntity()
+                        {
+                            WalletId = stake.WalletId,
+                            Amount = stake.DailyReward,
+                            Rate = 1,
+                            FromStack = stake.Id,
+                        };
+                        refunds.Add(refund);
+                        Log.Information($"{refund.Id} Rewarded for stack {stake.Id}");
+                        Console.WriteLine(stake.Id);
+                    }
+                }
+            }
+            db.SaveChanges();
+
+            foreach(var id in userids)
+            {
+                cache.Remove(cacheKey+id);
+                cache.Remove(_cacheKeyPrefix + id);
+            }
+            Log.Information("Finish log");
+        }
+    }
+}

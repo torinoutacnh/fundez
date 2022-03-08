@@ -1,0 +1,14 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="/developers/assets/JsonViewer/logo.png">
+    <title>API Document</title>
+    <link href="/developers/assets/JsonViewer/main.css" rel="stylesheet" type="text/css">
+    <script>var favicon = '/developers/assets/JsonViewer/logo.png';</script>
+</head>
+<body>
+    <script src="/developers/assets/JsonViewer/main.js"></script>
+</body>
+</html>

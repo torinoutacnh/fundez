@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TIGE</name>
+    </assembly>
+    <members>
+        <member name="M:TIGE.Areas.Api.Controllers.AuthController.Token(TIGE.Core.Share.Models.Authentication.RequestTokenModel)">
+            <summary>
+                Token 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+            <remarks>
+                Support GrantType: Refresh Token,Authorization Code (PKCE), Resource Owner Password, Client Credential.
+            </remarks>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.BusinessController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale Business
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.BusinessController.Delete(System.String)">
+            <summary>
+                Delete Business 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ImageController.GetPaged(TIGE.Core.Models.PagedRequestModel)">
+            <summary>
+                Get Paged File
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ImageController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale File
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ImageController.Get(System.String)">
+            <summary>
+                Get Detail Image 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ImageController.UploadBase64(TIGE.Core.Models.CreateImageModel)">
+            <summary>
+                Upload File
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ImageController.UploadMultiPart(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+                Upload File Multi-Part
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ImageController.Delete(System.String)">
+            <summary>
+                Delete Image 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ProtectionFeeController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale ProtectionFee
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.ProtectionFeeController.Delete(System.String)">
+            <summary>
+                Delete ProtectionFee 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.SlotController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale Slot
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.SlotController.Delete(System.String)">
+            <summary>
+                Delete Slot 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.TokenController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale Token
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.TokenController.Delete(System.String)">
+            <summary>
+                Delete Token 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.TokenController.Calculating(System.Double)">
+            <summary>
+                Token Calculating
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.GetPaged(TIGE.Core.Models.PagedRequestModel)">
+            <summary>
+                Get Paged User 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale User
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.Get(System.String)">
+            <summary>
+                Get Detail User 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.GetProfile">
+            <summary>
+                Get Logged In User Profile: Basic info and permissions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.Create(TIGE.Core.Share.Models.User.CreateUserModel)">
+            <summary>
+                Create User 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.Update(TIGE.Core.Share.Models.User.UserModel)">
+            <summary>
+                Update User 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.UserController.Delete(System.String)">
+            <summary>
+                Delete User 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.WalletController.GetDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale Wallet
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.WalletController.GetWithdrawDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale Withdraw
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.WalletController.GetWithdrawTigeDataTable(Elect.Web.DataTable.Models.Request.DataTableRequestModel)">
+            <summary>
+                Get DataTale WithdrawTige
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.WalletController.Delete(System.String)">
+            <summary>
+                Delete wallet 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Areas.Api.Controllers.WalletController.DeleteWithdraw(System.String)">
+            <summary>
+                Delete withdraw 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.SignIn">
+            <summary>
+                Sign In 
+            </summary>
+            <returns></returns>
+            <remarks>
+                Support GrantType: Implicit, Authorization Code (PKCE), Resource Owner Password.
+            </remarks>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.SubmitSignIn(TIGE.Core.Models.Authentication.AuthorizeModel)">
+            <summary>
+                Submit Sign In 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+            <remarks>
+                Support GrantType: Implicit, Authorization Code (PKCE), Resource Owner Password.
+            </remarks>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.SubmitVerifySignIn(TIGE.Core.Models.Authentication.AuthorizeWithCodeModel)">
+            <summary>
+                Submit Sign In with Verify
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+            <remarks>
+                Support GrantType: Implicit, Authorization Code (PKCE), Resource Owner Password.
+            </remarks>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.Authorized">
+            <summary>
+                Authorized 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.SignOut(System.String)">
+            <summary>
+                Sign Out 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.UnAuthorize">
+            <summary>
+                Un Authorize 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.ForgetPassword(TIGE.Core.Models.Authentication.ForgetPasswordModel)">
+            <summary>
+                Forget Password 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.SubmitForgetPassword(TIGE.Core.Models.Authentication.ForgetPasswordModel)">
+            <summary>
+                Submit Forget Password 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.ConfirmEmail(System.String)">
+            <summary>
+                Confirm Email
+            </summary>
+            <param name="token">Confirm Email Token via Email</param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.AuthController.SetPassword(System.String)">
+            <summary>
+                Set Password
+            </summary>
+            <param name="token">Set Password Token via Email</param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.WalletController.ConfirmDeposit(System.String)">
+            <summary>
+                Confirm Deposit Email
+            </summary>
+            <param name="token">Confirm Email Token via Email</param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.Controllers.WalletController.ConfirmWithdraw(System.String)">
+            <summary>
+                Confirm Email
+            </summary>
+            <param name="token">Confirm Email Token via Email</param>
+            <returns></returns>
+        </member>
+        <member name="P:TIGE.Models.StaticFileModel.FolderRelativePath">
+            <summary>
+                Use exactly folder name case in explorer 
+            </summary>
+            <remarks> Relative path from <see cref="P:TIGE.Models.StaticFileModel.AreaName" /> </remarks>
+        </member>
+        <member name="P:TIGE.Models.StaticFileModel.HttpRequestPath">
+            <summary>
+                Use lower case for http request 
+            </summary>
+        </member>
+        <member name="P:TIGE.Models.StaticFileModel.MaxAgeResponseHeader">
+            <summary>
+                Max Age in Cache Control Header 
+            </summary>
+            <remarks> Use the . separator between days and hours, see more: https://msdn.microsoft.com/en-us/library/system.timespan.aspx </remarks>
+        </member>
+        <member name="M:TIGE.StartupAuth.AddAuth(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                Binding Logged In User, MVC and API Authentication Filter
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TIGE.StartupMvcApi.AddAntiforgeryToken(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                Configures the anti-forgery tokens for better security. 
+            </summary>
+            <param name="services"></param>
+            <remarks> See: http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages </remarks>
+        </member>
+    </members>
+</doc>

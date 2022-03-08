@@ -1,0 +1,159 @@
+﻿@using EnumsNET
+@using TIGE.Contract.Service
+@using TIGE.Core.Share.Models
+@using TIGE.Core.Share.Models.Crypto
+@using Enums = TIGE.Core.Share.Constants.Enums
+@inject IConfigurationService ConfigurationService
+@{
+
+    var CurrentToken = ViewBag.CurrentToken;
+    var config = ConfigurationService.GetConfig();
+}
+
+@model TIGE.Core.Share.Models.CreateWithdrawRequestModel
+<style>
+
+    @@media only screen and (max-width: 450px) {
+        .table-responsive--md tr th, .table-responsive--md tr td {
+            padding-left: 80px !important;
+            white-space: initial;
+            word-break: break-all
+        }
+    }
+</style>
+<section class="pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title"><span class="font-weight-normal">Withdraw </span> <b class="base--color">Request</b></h2>
+                </div>
+                <div class="text-center">
+                    <span class="col-sm-5" onclick="">
+                        <a href="/wallets/withdraw"><label class="text-warning">Withdraw USD</label></a>
+                    </span>
+                    <span class="col-sm-5">
+                        <a href="/wallets/withdrawtige"><label class="text-warning">Withdraw TIGE</label></a>
+                    </span>
+                    @*<div class="d-inline">
+                            <input type="radio" name="name" value="" /><label>Withdraw USD</label>
+                        </div>
+                        <div class="d-inline">
+                            <input type="radio" name="name" value="" /><label>Withdraw TIGE</label>
+                        </div>*@
+                </div>
+                <div class="section-header" style="margin-top:50px;">
+                    <ol>
+                        <li>
+                            1. Only withdrawal with Decentralized Wallet address Network BEP20 (BSC) and confirmed by your mail. (Do not use wallet address on Exchanges)
+                        </li>
+                        <li>2. Recheck your wallet address withdrawal before confirmed by your mail.</li>
+                        <li>3. Minimum Withdrawal USD transaction is @config.SalePhone2 Tige.</li>
+                        <li>4. Network withdrawal fee and time proceed will depend on Network gas fee when the transactions confirm.</li>
+                        <li>
+                            5. Until the approval from the system is made, an equivalent amount of your assets will be temporarily unavailable for other transactions.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="profit-calculator-wrapper">
+                    <form class="" asp-action="SubmitWithdrawTige" method="post">
+                        <div class="row mb-none-30">
+                            <div class="col-lg-12 mb-30">
+                                <label class="d-block">Total Tokens (TIGE)</label>
+                                <h2>@CurrentToken.ToString("###,###,###,###0.####")</h2>
+                                <label>Amount (TIGE)</label>
+                                <input type="text" asp-for="Amount" placeholder="0.00" value="@config.SalePhone2" class="form-control">
+                                <span asp-validation-for="Amount"></span>
+                                <label class="mt-15">Wallet Address</label>
+                                <input type="text" asp-for="WalletAddress" placeholder="" value="" class="form-control">
+                                <span asp-validation-for="WalletAddress"></span>
+                            </div>
+                            <div class="col-lg-12 mb-30">
+                                <button type="submit" class="cmn-btn">Send Request</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <div class="table-responsive--md p-0">
+                    <table class="table style--two white-space-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Token Quantity</th>
+                                <th>Fee (Tige)</th>
+                                @*<th>Amount (ETH)</th>*@
+                                <th>Time</th>
+                                <th>Tx hash</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                //var withdraws = (List<WithdrawRequestModel>)ViewBag.WithDraw;
+                                var withdraws = (IEnumerable<WithdrawRequestModel>)ViewBag.WithDraw;
+                                withdraws = withdraws.Where(x => x.Status != Enums.WithdrawStatus.New
+                                && x.Status != Enums.WithdrawStatus.Approved
+                                && x.Status != Enums.WithdrawStatus.Confirming
+                                && x.Status != Enums.WithdrawStatus.Reject);
+
+                                foreach (var withdraw in withdraws.OrderByDescending(x => x.CreatedTime))
+                                {
+                                    <tr>
+                                        <td data-label="ID">@withdraw.Id</td>
+                                        <td data-label="Amount (Tige)">
+                                            <span class="text-success">@withdraw.AmountUSD.ToString("###,###,###,###0.#####")</span>
+                                        </td>
+                                        <td data-label="Fee (Tige)">
+                                            <span class="text-success">@withdraw.FeeUSD.ToString("###,###,###,###0.#####")</span>
+                                        </td>
+                                        @*<td data-label="Amount (ETH)">
+                                            <span class="text-success">@withdraw.AmountETH.ToString("###,###,###,###0.######")</span>
+                                        </td>*@
+                                        <td data-label="Time">@withdraw.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        <td data-label="Tx hash" class="tx-hash">@withdraw.TxHash</td>
+                                        <td data-label="Status">@withdraw.Status.AsString(EnumFormat.DisplayName)</td>
+                                        @if (withdraw.Status != Enums.WithdrawStatus.TokenApproved && withdraw.Status != Enums.WithdrawStatus.TokenConfirming)
+                                        {
+                                            <td data-label="Action"><span style="cursor: pointer;" data-plugins="confirm" data-confirm-yes-callback="deleteWithdraw('@withdraw.Id')"><i class="fa fa-trash"></i></span></td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function deleteWithdraw(id) {
+
+        var url = '@Url.Action("DeleteWithdraw","Wallet", new { Area ="Api",id = "PARAMETER_ID" })'.replace(/PARAMETER_ID/g, id);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function() {
+                location.reload();
+            }
+        });
+    }
+
+</script>

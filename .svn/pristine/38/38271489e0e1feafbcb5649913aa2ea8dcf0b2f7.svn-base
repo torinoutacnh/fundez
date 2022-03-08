@@ -1,0 +1,225 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- Information -->
+  <PropertyGroup>
+    <Authors>Linh Nguyen</Authors>
+    <Copyright>http://topnguyen.net</Copyright>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <DocumentationFile>TIGE.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
+    <LangVersion>7.2</LangVersion>
+    <!-- Output -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>.\bin\</OutputPath>
+  </PropertyGroup>
+  <!-- Copy to Ouput -->
+  <ItemGroup>
+    <Content Include="wwwroot\**\*;Views\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Remove="wwwroot\**\*.scss" />
+    <Content Include="Areas\Portal\wwwroot\**\*;Areas\Portal\Views\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Remove="wwwroot\Catalog\**" />
+    <Content Remove="Areas\Portal\wwwroot\**\*.scss" />
+    <Content Remove="wwwroot\Catalog\**" />
+    <EmbeddedResource Remove="wwwroot\Catalog\**" />
+    <None Remove="wwwroot\Catalog\**" />
+    <None Remove="Areas\Portal\Views\Business\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Business\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\ProtectionFee\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\ProtectionFee\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifySellToken.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyWithDrawTige.cshtml" />
+    <None Remove="Areas\Portal\Views\Token\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Token\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Slot\Add.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_UpdateProfile.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyBuySlot.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyDeposit.cshtml" />
+    <None Remove="Areas\Portal\Views\Template\_VerifyWithDraw.cshtml" />
+    <None Remove="Areas\Portal\Views\Slot\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Slot\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\Edit.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\EditWithdraw.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\Index.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\Withdraw.cshtml" />
+    <None Remove="Areas\Portal\Views\Wallet\WithdrawTige.cshtml" />
+    <None Remove="Areas\Portal\wwwroot\img\background.jpg" />
+    <None Remove="Views\Auth\Authorized.cshtml" />
+    <None Remove="Views\Auth\ConfirmEmail.cshtml" />
+    <None Remove="Views\Auth\ForgetPassword.cshtml" />
+    <None Remove="Views\Auth\SetPassword.cshtml" />
+    <None Remove="Views\Auth\SignIn.cshtml" />
+    <None Remove="Views\Auth\UnAuthorize.cshtml" />
+    <None Remove="Views\Auth\VeryfySignIn.cshtml" />
+    <None Remove="Views\Home\Policy.cshtml" />
+    <None Remove="Views\Home\Privacy.cshtml" />
+    <None Remove="Views\Home\TermCondition.cshtml" />
+    <None Remove="Views\Profile\ConfirmProfile.cshtml" />
+    <None Remove="Views\Token\Confirm.cshtml" />
+    <None Remove="Views\Token\Index.cshtml" />
+    <None Remove="Views\Slot\Index.cshtml" />
+    <None Remove="Views\Business\Index.cshtml" />
+    <None Remove="Views\Verify\Verify.cshtml" />
+    <None Remove="Views\Wallet\ConfirmDeposit.cshtml" />
+    <None Remove="Views\Wallet\Withdraw.cshtml" />
+    <None Remove="wwwroot\assets\css\alert\dark.css" />
+    <None Remove="wwwroot\assets\js\sweetalert2.min.js" />
+    <None Remove="wwwroot\css\bootstrap.css" />
+    <None Remove="wwwroot\css\bootstrap.css.map" />
+    <None Remove="wwwroot\css\main.css" />
+    <None Remove="wwwroot\css\main.css.map" />
+    <None Remove="wwwroot\images\1-nature.jpg" />
+    <None Remove="wwwroot\images\10-people.jpg" />
+    <None Remove="wwwroot\images\11-people.jpg" />
+    <None Remove="wwwroot\images\13-people.jpg" />
+    <None Remove="wwwroot\images\14-people.jpg" />
+    <None Remove="wwwroot\images\16-people.jpg" />
+    <None Remove="wwwroot\images\17-people.jpg" />
+    <None Remove="wwwroot\images\18-computer.jpg" />
+    <None Remove="wwwroot\images\19-computer.jpg" />
+    <None Remove="wwwroot\images\2-nature.jpg" />
+    <None Remove="wwwroot\images\20-computer.jpg" />
+    <None Remove="wwwroot\images\23-computer.jpg" />
+    <None Remove="wwwroot\images\24-computer.jpg" />
+    <None Remove="wwwroot\images\26-food.jpg" />
+    <None Remove="wwwroot\images\27-food.jpg" />
+    <None Remove="wwwroot\images\28-food.jpg" />
+    <None Remove="wwwroot\images\29-food.jpg" />
+    <None Remove="wwwroot\images\30-food.jpg" />
+    <None Remove="wwwroot\images\4-nature.jpg" />
+    <None Remove="wwwroot\images\5-nature.jpg" />
+    <None Remove="wwwroot\images\8-nature.jpg" />
+    <None Remove="wwwroot\images\9-nature.jpg" />
+    <None Remove="wwwroot\images\about-img-1.jpg" />
+    <None Remove="wwwroot\images\about-img-2.png" />
+    <None Remove="wwwroot\images\about-img-3.png" />
+    <None Remove="wwwroot\images\about-img-4.png" />
+    <None Remove="wwwroot\images\about-img-5.png" />
+    <None Remove="wwwroot\images\blog-1.jpg" />
+    <None Remove="wwwroot\images\blog-2.jpg" />
+    <None Remove="wwwroot\images\blog-3.jpg" />
+    <None Remove="wwwroot\images\blog-4.jpg" />
+    <None Remove="wwwroot\images\face-1.jpg" />
+    <None Remove="wwwroot\images\face-2.jpg" />
+    <None Remove="wwwroot\images\face-3.jpg" />
+    <None Remove="wwwroot\images\face-4.jpg" />
+    <None Remove="wwwroot\images\face-5.jpg" />
+    <None Remove="wwwroot\images\favicon.png" />
+    <None Remove="wwwroot\images\image-detail.jpg" />
+    <None Remove="wwwroot\images\photo-perfect-screenshot.png" />
+    <None Remove="wwwroot\images\QR\ThankAuthy.jpg" />
+    <None Remove="wwwroot\js\bootstrap.js" />
+    <None Remove="wwwroot\js\bootstrap.js.map" />
+    <None Remove="wwwroot\js\bootstrap.min.js" />
+    <None Remove="wwwroot\js\bootstrap.min.js.map" />
+    <None Remove="wwwroot\js\carousel.js" />
+    <None Remove="wwwroot\js\core.js" />
+    <None Remove="wwwroot\js\jquery-1.11.1.js" />
+    <None Remove="wwwroot\js\jquery-3.3.1.min.js" />
+    <None Remove="wwwroot\js\main.js" />
+    <None Remove="wwwroot\TNImages\00feb19c1133f16da822.jpg" />
+    <None Remove="wwwroot\TNImages\0157f13f5190b1cee881.jpg" />
+    <None Remove="wwwroot\TNImages\0a202f84882b6875313a.jpg" />
+    <None Remove="wwwroot\TNImages\0cc4ac070aa8eaf6b3b9.jpg" />
+    <None Remove="wwwroot\TNImages\0ec6be6618c9f897a1d8.jpg" />
+    <None Remove="wwwroot\TNImages\1f67ca076ca88cf6d5b9.jpg" />
+    <None Remove="wwwroot\TNImages\2fe51ee9be465e180757.jpg" />
+    <None Remove="wwwroot\TNImages\30bc8d0b2ba4cbfa92b5.jpg" />
+    <None Remove="wwwroot\TNImages\3aa1aae90c46ec18b557.jpg" />
+    <None Remove="wwwroot\TNImages\4225aef70e58ee06b749.jpg" />
+    <None Remove="wwwroot\TNImages\437d0aa7aa084a561319.jpg" />
+    <None Remove="wwwroot\TNImages\49c845bde312034c5a03.jpg" />
+    <None Remove="wwwroot\TNImages\4dda3387932873762a39.jpg" />
+    <None Remove="wwwroot\TNImages\4fb4b1a71708f756ae19.jpg" />
+    <None Remove="wwwroot\TNImages\5855c9746fdb8f85d6ca.jpg" />
+    <None Remove="wwwroot\TNImages\59de571bf1b411ea48a5.jpg" />
+    <None Remove="wwwroot\TNImages\5c066bdacb752b2b7264.jpg" />
+    <None Remove="wwwroot\TNImages\5febfe1a5eb5beebe7a4.jpg" />
+    <None Remove="wwwroot\TNImages\6d3bb3db1374f32aaa65.jpg" />
+    <None Remove="wwwroot\TNImages\6d5cace30b4ceb12b25d.jpg" />
+    <None Remove="wwwroot\TNImages\733b6070c6df26817fce.jpg" />
+    <None Remove="wwwroot\TNImages\788317a9b70657580e17.jpg" />
+    <None Remove="wwwroot\TNImages\7cac5a12fcbd1ce345ac.jpg" />
+    <None Remove="wwwroot\TNImages\86782695813a6164382b.jpg" />
+    <None Remove="wwwroot\TNImages\8aa3c31865b785e9dca6.jpg" />
+    <None Remove="wwwroot\TNImages\8d78cad36d7c8d22d46d.jpg" />
+    <None Remove="wwwroot\TNImages\8d8f06d0a67f46211f6e.jpg" />
+    <None Remove="wwwroot\TNImages\9291f17456dbb685efca.jpg" />
+    <None Remove="wwwroot\TNImages\964145dee371032f5a60.jpg" />
+    <None Remove="wwwroot\TNImages\98bdc74867e787b9def6.jpg" />
+    <None Remove="wwwroot\TNImages\9d48a35805f7e5a9bce6.jpg" />
+    <None Remove="wwwroot\TNImages\9eafd2a0720f9251cb1e.jpg" />
+    <None Remove="wwwroot\TNImages\9f6e250685a965f73cb8.jpg" />
+    <None Remove="wwwroot\TNImages\a3dfa120068fe6d1bf9e.jpg" />
+    <None Remove="wwwroot\TNImages\a5a65a2dfc821cdc4593.jpg" />
+    <None Remove="wwwroot\TNImages\c4d7d6b676199647cf08.jpg" />
+    <None Remove="wwwroot\TNImages\c512221a84b564eb3da4.jpg" />
+    <None Remove="wwwroot\TNImages\c683df6c78c3989dc1d2.jpg" />
+    <None Remove="wwwroot\TNImages\d09aa43b0294e2cabb85.jpg" />
+    <None Remove="wwwroot\TNImages\d654fe365e99bec7e788.jpg" />
+    <None Remove="wwwroot\TNImages\d9cf276580ca609439db.jpg" />
+    <None Remove="wwwroot\TNImages\deca350f93a073fe2ab1.jpg" />
+    <None Remove="wwwroot\TNImages\logo.png" />
+    <Content Include="TIGE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cross\TIGE.Core.Share\TIGE.Core.Share.csproj" />
+    <ProjectReference Include="..\..\Cross\TIGE.Core\TIGE.Core.csproj" />
+    <ProjectReference Include="..\..\Cross\TIGE.Mapper\TIGE.Mapper.csproj" />
+    <ProjectReference Include="..\..\Repository\TIGE.Contract.Repository\TIGE.Contract.Repository.csproj" />
+    <ProjectReference Include="..\..\Repository\TIGE.Repository\TIGE.Repository.csproj" />
+    <ProjectReference Include="..\..\Service\TIGE.Contract.Service\TIGE.Contract.Service.csproj" />
+    <ProjectReference Include="..\..\Service\TIGE.Service\TIGE.Service.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--<PackageReference Include="Elmah.Io.AspNetCore" Version="3.5.59" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />-->
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\_Index\_Category.cshtml" />
+    <UpToDateCheckInput Remove="Views\Home\_Index\_NewImage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Areas\Portal\wwwroot\images\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Portal\wwwroot\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\images\favicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\QR\ThankAuthy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\core.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\Auth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
